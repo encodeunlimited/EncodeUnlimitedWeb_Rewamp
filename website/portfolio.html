@@ -1,26 +1,32 @@
 ﻿<!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio projects delivered by Encode Unlimited across SaaS, fintech, healthcare, and logistics." />
+  <meta name="description"
+    content="Portfolio projects delivered by Encode Unlimited across SaaS, fintech, healthcare, and logistics." />
   <title>Portfolio | Encode Unlimited</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link rel="stylesheet" href="../assets/css/global.css" />
 </head>
+
 <body data-page="portfolio" class="text-slate-100 antialiased">
   <div id="site-nav"></div>
   <main>
     <section class="page-hero">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl font-bold text-white" data-aos="fade-up">Portfolio / Projects</h1>
-        <p class="mt-4 max-w-3xl text-slate-300" data-aos="fade-up" data-aos-delay="120">A curated collection of software products designed and engineered by Encode Unlimited.</p>
+        <p class="mt-4 max-w-3xl text-slate-300" data-aos="fade-up" data-aos-delay="120">A curated collection of
+          software products designed and engineered by Encode Unlimited.</p>
       </div>
     </section>
 
     <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-      <div class="mb-8 flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-5 md:flex-row md:items-center md:justify-between" data-aos="fade-up">
+      <div
+        class="mb-8 flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-5 md:flex-row md:items-center md:justify-between"
+        data-aos="fade-up">
         <div class="flex flex-wrap gap-2">
           <button class="filter-btn is-active" type="button" data-filter-btn="all">All</button>
           <button class="filter-btn" type="button" data-filter-btn="saas">SaaS</button>
@@ -29,19 +35,80 @@
           <button class="filter-btn" type="button" data-filter-btn="logistics">Logistics</button>
           <button class="filter-btn" type="button" data-filter-btn="integration">Integrations</button>
         </div>
-        <input data-project-search type="text" placeholder="Search projects or technologies..." class="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-2.5 text-slate-100 outline-none focus:border-cyan-400 md:max-w-sm" />
+        <input data-project-search type="text" placeholder="Search projects or technologies..."
+          class="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-2.5 text-slate-100 outline-none focus:border-cyan-400 md:max-w-sm" />
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <article data-project-card data-category="saas" data-keywords="retail nexus saas react node postgresql inventory analytics" class="card p-0 overflow-hidden" data-aos="fade-up"><img src="../assets/images/project-1.svg" alt="Retail Nexus project preview" class="h-44 w-full object-cover" /><div class="p-5"><h2 class="font-semibold text-white">Retail Nexus SaaS</h2><p class="mt-2 text-sm text-slate-300">Inventory forecasting and sales intelligence platform.</p><p class="mt-3 text-xs text-cyan-300">React, Node.js, PostgreSQL</p><a href="#" class="mt-4 inline-block btn-secondary">View Project</a></div></article>
-        <article data-project-card data-category="fintech" data-keywords="finflow onboarding fintech vue laravel mysql kyc compliance" class="card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="80"><img src="../assets/images/project-2.svg" alt="FinFlow project preview" class="h-44 w-full object-cover" /><div class="p-5"><h2 class="font-semibold text-white">FinFlow Onboarding</h2><p class="mt-2 text-sm text-slate-300">Automated onboarding and compliance verification suite.</p><p class="mt-3 text-xs text-cyan-300">Vue, Laravel, MySQL</p><a href="#" class="mt-4 inline-block btn-secondary">View Project</a></div></article>
-        <article data-project-card data-category="logistics" data-keywords="routevision logistics javascript node map api dashboard fleet" class="card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="160"><img src="../assets/images/project-3.svg" alt="RouteVision project preview" class="h-44 w-full object-cover" /><div class="p-5"><h2 class="font-semibold text-white">RouteVision Dashboard</h2><p class="mt-2 text-sm text-slate-300">Real-time fleet monitoring and route optimization.</p><p class="mt-3 text-xs text-cyan-300">JavaScript, Node.js, Map APIs</p><a href="#" class="mt-4 inline-block btn-secondary">View Project</a></div></article>
-        <article data-project-card data-category="healthcare" data-keywords="medisync healthcare patient portal react php mysql" class="card p-0 overflow-hidden" data-aos="fade-up"><img src="../assets/images/project-4.svg" alt="MediSync project preview" class="h-44 w-full object-cover" /><div class="p-5"><h2 class="font-semibold text-white">MediSync Portal</h2><p class="mt-2 text-sm text-slate-300">Patient and provider workflow management system.</p><p class="mt-3 text-xs text-cyan-300">React, PHP, MySQL</p><a href="#" class="mt-4 inline-block btn-secondary">View Project</a></div></article>
-        <article data-project-card data-category="saas" data-keywords="learnsphere lms vue laravel postgresql education" class="card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="80"><img src="../assets/images/project-5.svg" alt="LearnSphere project preview" class="h-44 w-full object-cover" /><div class="p-5"><h2 class="font-semibold text-white">LearnSphere LMS</h2><p class="mt-2 text-sm text-slate-300">Learning platform with role-based content delivery.</p><p class="mt-3 text-xs text-cyan-300">Vue, Laravel, PostgreSQL</p><a href="#" class="mt-4 inline-block btn-secondary">View Project</a></div></article>
-        <article data-project-card data-category="integration" data-keywords="opsbridge integration api node docker cloud erp crm" class="card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="160"><img src="../assets/images/project-6.svg" alt="OpsBridge project preview" class="h-44 w-full object-cover" /><div class="p-5"><h2 class="font-semibold text-white">OpsBridge Integrations</h2><p class="mt-2 text-sm text-slate-300">API gateway connecting ERP, CRM, and support systems.</p><p class="mt-3 text-xs text-cyan-300">Node.js, Docker, Cloud</p><a href="#" class="mt-4 inline-block btn-secondary">View Project</a></div></article>
+        <article data-project-card data-category="saas"
+          data-keywords="retail nexus saas react node postgresql inventory analytics" class="card p-0 overflow-hidden"
+          data-aos="fade-up"><img src="../assets/images/project-1.png" alt="Retail Nexus project preview"
+            class="h-44 w-full object-cover" />
+          <div class="p-5">
+            <h2 class="font-semibold text-white">Retail Nexus SaaS</h2>
+            <p class="mt-2 text-sm text-slate-300">Inventory forecasting and sales intelligence platform.</p>
+            <p class="mt-3 text-xs text-cyan-300">React, Node.js, PostgreSQL</p><a href="#"
+              class="mt-4 inline-block btn-secondary">View Project</a>
+          </div>
+        </article>
+        <article data-project-card data-category="fintech"
+          data-keywords="finflow onboarding fintech vue laravel mysql kyc compliance" class="card p-0 overflow-hidden"
+          data-aos="fade-up" data-aos-delay="80"><img src="../assets/images/project-2.png" alt="FinFlow project preview"
+            class="h-44 w-full object-cover" />
+          <div class="p-5">
+            <h2 class="font-semibold text-white">FinFlow Onboarding</h2>
+            <p class="mt-2 text-sm text-slate-300">Automated onboarding and compliance verification suite.</p>
+            <p class="mt-3 text-xs text-cyan-300">Vue, Laravel, MySQL</p><a href="#"
+              class="mt-4 inline-block btn-secondary">View Project</a>
+          </div>
+        </article>
+        <article data-project-card data-category="logistics"
+          data-keywords="routevision logistics javascript node map api dashboard fleet" class="card p-0 overflow-hidden"
+          data-aos="fade-up" data-aos-delay="160"><img src="../assets/images/project-3.png"
+            alt="RouteVision project preview" class="h-44 w-full object-cover" />
+          <div class="p-5">
+            <h2 class="font-semibold text-white">RouteVision Dashboard</h2>
+            <p class="mt-2 text-sm text-slate-300">Real-time fleet monitoring and route optimization.</p>
+            <p class="mt-3 text-xs text-cyan-300">JavaScript, Node.js, Map APIs</p><a href="#"
+              class="mt-4 inline-block btn-secondary">View Project</a>
+          </div>
+        </article>
+        <article data-project-card data-category="healthcare"
+          data-keywords="medisync healthcare patient portal react php mysql" class="card p-0 overflow-hidden"
+          data-aos="fade-up"><img src="../assets/images/project-4.png" alt="MediSync project preview"
+            class="h-44 w-full object-cover" />
+          <div class="p-5">
+            <h2 class="font-semibold text-white">MediSync Portal</h2>
+            <p class="mt-2 text-sm text-slate-300">Patient and provider workflow management system.</p>
+            <p class="mt-3 text-xs text-cyan-300">React, PHP, MySQL</p><a href="#"
+              class="mt-4 inline-block btn-secondary">View Project</a>
+          </div>
+        </article>
+        <article data-project-card data-category="saas" data-keywords="learnsphere lms vue laravel postgresql education"
+          class="card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="80"><img
+            src="../assets/images/project-5.png" alt="LearnSphere project preview" class="h-44 w-full object-cover" />
+          <div class="p-5">
+            <h2 class="font-semibold text-white">LearnSphere LMS</h2>
+            <p class="mt-2 text-sm text-slate-300">Learning platform with role-based content delivery.</p>
+            <p class="mt-3 text-xs text-cyan-300">Vue, Laravel, PostgreSQL</p><a href="#"
+              class="mt-4 inline-block btn-secondary">View Project</a>
+          </div>
+        </article>
+        <article data-project-card data-category="integration"
+          data-keywords="opsbridge integration api node docker cloud erp crm" class="card p-0 overflow-hidden"
+          data-aos="fade-up" data-aos-delay="160"><img src="../assets/images/project-6.png"
+            alt="OpsBridge project preview" class="h-44 w-full object-cover" />
+          <div class="p-5">
+            <h2 class="font-semibold text-white">OpsBridge Integrations</h2>
+            <p class="mt-2 text-sm text-slate-300">API gateway connecting ERP, CRM, and support systems.</p>
+            <p class="mt-3 text-xs text-cyan-300">Node.js, Docker, Cloud</p><a href="#"
+              class="mt-4 inline-block btn-secondary">View Project</a>
+          </div>
+        </article>
       </div>
 
-      <div data-project-empty class="hidden mt-10 rounded-xl border border-slate-700 bg-slate-900/70 p-6 text-center text-sm text-slate-300">
+      <div data-project-empty
+        class="hidden mt-10 rounded-xl border border-slate-700 bg-slate-900/70 p-6 text-center text-sm text-slate-300">
         No projects match your current filter. Try another category or search keyword.
       </div>
     </section>
@@ -53,5 +120,5 @@
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
   <script src="../assets/js/main.js"></script>
 </body>
-</html>
 
+</html>

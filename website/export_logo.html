@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Logo to PNG</title>
+    <style>
+        body {
+            background: #020617;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            background: #0f172a;
+        }
+
+        canvas {
+            border: 1px solid #334155;
+            margin-top: 20px;
+            max-width: 90%;
+            background: transparent;
+        }
+
+        button {
+            background: #5da404;
+            color: #020617;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #7edc05;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Encode Unlimited Logo Export</h2>
+        <p>This tool renders your SVG logos to high-resolution PNGs.</p>
+
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+            <button onclick="renderLogo('dark')">Load Dark Version</button>
+            <button onclick="renderLogo('light')" style="background: #cbd5e1; color: #020617;">Load Light
+                Version</button>
+        </div>
+
+        <button id="downloadBtn" onclick="downloadPNG()" style="display: none; border: 2px solid white;">Download PNG
+            (2000x570)</button>
+        <br>
+        <div id="previewLabel" style="margin-top: 20px; font-size: 14px; display: none;">Preview:</div>
+        <canvas id="logoCanvas"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const previewLabel = document.getElementById('previewLabel');
+        let currentTheme = 'dark';
+
+        // Settings
+        const width = 2000;
+        const height = 570;
+        canvas.width = width;
+        canvas.height = height;
+
+        function renderLogo(theme) {
+            currentTheme = theme;
+            const img = new Image();
+            img.onload = function () {
+                ctx.clearRect(0, 0, width, height);
+                // For the light theme preview on a dark page, we add a white bg just for the canvas preview
+                if (theme === 'light') {
+                    canvas.style.background = 'white';
+                } else {
+                    canvas.style.background = 'transparent';
+                }
+                ctx.drawImage(img, 0, 0, width, height);
+                downloadBtn.style.display = 'inline-block';
+                previewLabel.style.display = 'block';
+            };
+            img.src = theme === 'light' ? '../assets/images/logo-full-light.svg' : '../assets/images/logo-full.svg';
+        }
+
+        function downloadPNG() {
+            const link = document.createElement('a');
+            link.download = `encode-unlimited-logo-${currentTheme}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+
+</html>

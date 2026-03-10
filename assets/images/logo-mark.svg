@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mark-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7edc05" />
+      <stop offset="100%" stop-color="#22c55e" />
+    </linearGradient>
+  </defs>
+  <!-- Minimalist Abstract E / Infinity Integration -->
+  <path d="M12 16H52M12 32H40M12 48H52" stroke="white" stroke-width="6" stroke-linecap="round" />
+  <path d="M12 16V48" stroke="url(#mark-grad)" stroke-width="6" stroke-linecap="round" />
+  <circle cx="48" cy="32" r="5" fill="#7edc05" />
+</svg>

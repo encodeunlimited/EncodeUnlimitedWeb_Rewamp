@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hex-grad-light" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4a8403" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+  </defs>
+  <!-- Modern Hexagonal Frame with slightly darker green for light background contrast -->
+  <path d="M32 4L58.5 18V46L32 60L5.5 46V18L32 4Z" stroke="url(#hex-grad-light)" stroke-width="4" stroke-linejoin="round" />
+  <!-- Stylized 'E' integrated character in Dark Slate -->
+  <path d="M22 24H42" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
+  <path d="M22 32H38" stroke="url(#hex-grad-light)" stroke-width="4" stroke-linecap="round" />
+  <path d="M22 40H42" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
+  <path d="M22 24V40" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
+</svg>
