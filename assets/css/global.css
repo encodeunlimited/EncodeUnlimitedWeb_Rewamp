@@ -11,13 +11,11 @@ html {
 
 body {
   background:
-    linear-gradient(
-      to bottom,
+    linear-gradient(to bottom,
       rgba(74, 132, 3, 0.26) 0%,
       rgba(18, 37, 19, 0.52) 26%,
       rgba(6, 19, 29, 0.88) 56%,
-      #020617 100%
-    ),
+      #020617 100%),
     radial-gradient(circle at 15% 18%, rgba(93, 164, 4, 0.12), transparent 38%),
     radial-gradient(circle at 82% 24%, rgba(126, 220, 5, 0.09), transparent 42%),
     #020617;
@@ -33,14 +31,23 @@ body::before {
   z-index: -2;
 }
 
+#mouse-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(800px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+      rgba(126, 220, 5, 0.06),
+      transparent 80%);
+  transition: background 0.3s ease;
+}
+
 .site-header {
   position: fixed;
-  background: linear-gradient(
-    to bottom,
-    rgba(2, 6, 23, 0.92) 0%,
-    rgba(2, 6, 23, 0.82) 55%,
-    rgba(2, 6, 23, 0.62) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(2, 6, 23, 0.92) 0%,
+      rgba(2, 6, 23, 0.82) 55%,
+      rgba(2, 6, 23, 0.62) 100%);
   border-bottom: 1px solid rgba(148, 163, 184, 0.08);
   box-shadow: 0 10px 26px rgba(2, 6, 23, 0.28);
 }
@@ -55,6 +62,7 @@ body::before {
   pointer-events: none;
   background: linear-gradient(to bottom, rgba(2, 6, 23, 0.42), rgba(2, 6, 23, 0));
 }
+
 .glass {
   background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(10px);
@@ -75,6 +83,9 @@ body::before {
   transform: translateY(-4px);
   border-color: rgba(126, 220, 5, 0.55);
   box-shadow: 0 18px 35px rgba(22, 63, 5, 0.36);
+  background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y),
+      rgba(126, 220, 5, 0.08),
+      rgba(15, 23, 42, 0.75) 100%);
 }
 
 .media-frame {
@@ -106,6 +117,7 @@ body::before {
   padding: 0.35rem 0.7rem;
   font-size: 0.75rem;
 }
+
 .icon-chip {
   width: 4.5rem;
   height: 4.5rem;
@@ -115,7 +127,7 @@ body::before {
   justify-content: center;
   border: 1px solid rgba(148, 163, 184, 0.2);
   background: linear-gradient(160deg, rgba(30, 41, 59, 0.65), rgba(15, 23, 42, 0.92));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 10px 24px rgba(2, 6, 23, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 10px 24px rgba(2, 6, 23, 0.35);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -132,17 +144,17 @@ body::before {
 
 .icon-chip.blue {
   color: #60a5fa;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(96,165,250,0.12), 0 14px 28px rgba(59,130,246,0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 0 0 1px rgba(96, 165, 250, 0.12), 0 14px 28px rgba(59, 130, 246, 0.18);
 }
 
 .icon-chip.pink {
   color: #f472b6;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(244,114,182,0.12), 0 14px 28px rgba(236,72,153,0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 0 0 1px rgba(244, 114, 182, 0.12), 0 14px 28px rgba(236, 72, 153, 0.16);
 }
 
 .icon-chip.green {
   color: #22c55e;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(34,197,94,0.16), 0 14px 28px rgba(34,197,94,0.17);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 0 0 1px rgba(34, 197, 94, 0.16), 0 14px 28px rgba(34, 197, 94, 0.17);
 }
 
 .feature-list li {
@@ -380,7 +392,7 @@ body::before {
 .testimonial-shell {
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(15,23,42,0.92), rgba(2,6,23,0.88));
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.88));
   overflow: hidden;
 }
 
@@ -438,7 +450,7 @@ body::before {
   width: 3rem;
   height: 3rem;
   border-radius: 999px;
-  border: 1px solid rgba(126,220,5,0.5);
+  border: 1px solid rgba(126, 220, 5, 0.5);
   background: rgba(15, 23, 42, 0.94);
   color: #d9f99d;
   display: grid;
@@ -447,18 +459,18 @@ body::before {
 
 #ai-chat-panel {
   width: min(92vw, 360px);
-  border: 1px solid rgba(148,163,184,0.2);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 1rem;
   background: rgba(2, 6, 23, 0.96);
-  box-shadow: 0 18px 42px rgba(2,6,23,0.45);
+  box-shadow: 0 18px 42px rgba(2, 6, 23, 0.45);
   overflow: hidden;
   margin-bottom: 0.65rem;
 }
 
 .ai-chat-head {
   padding: 0.85rem 1rem;
-  border-bottom: 1px solid rgba(148,163,184,0.16);
-  background: linear-gradient(to right, rgba(93,164,4,0.18), rgba(15,23,42,0.4));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  background: linear-gradient(to right, rgba(93, 164, 4, 0.18), rgba(15, 23, 42, 0.4));
 }
 
 .ai-chat-messages {
@@ -482,14 +494,14 @@ body::before {
   align-self: flex-start;
   background: rgba(30, 41, 59, 0.92);
   color: #e2e8f0;
-  border: 1px solid rgba(100,116,139,0.35);
+  border: 1px solid rgba(100, 116, 139, 0.35);
 }
 
 .ai-msg.user {
   align-self: flex-end;
-  background: rgba(93,164,4,0.2);
+  background: rgba(93, 164, 4, 0.2);
   color: #ecfccb;
-  border: 1px solid rgba(126,220,5,0.45);
+  border: 1px solid rgba(126, 220, 5, 0.45);
 }
 
 .ai-quick {
@@ -512,14 +524,14 @@ body::before {
   display: flex;
   gap: 0.5rem;
   padding: 0.8rem;
-  border-top: 1px solid rgba(148,163,184,0.16);
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
 }
 
 .ai-chat-input input {
   flex: 1;
   border-radius: 0.65rem;
-  border: 1px solid rgba(71,85,105,1);
-  background: rgba(15,23,42,0.86);
+  border: 1px solid rgba(71, 85, 105, 1);
+  background: rgba(15, 23, 42, 0.86);
   color: #e2e8f0;
   padding: 0.52rem 0.7rem;
   font-size: 0.82rem;
@@ -534,4 +546,3 @@ body::before {
   font-size: 0.8rem;
   font-weight: 600;
 }
-

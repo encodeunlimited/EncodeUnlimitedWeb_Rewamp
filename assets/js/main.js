@@ -1,15 +1,18 @@
 ﻿(function () {
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  const ext = isLocal ? ".html" : "";
+
   const navItems = [
-    { label: "Home", href: "index.html", key: "home" },
-    { label: "Services", href: "services.html", key: "services" },
-    { label: "Portfolio", href: "portfolio.html", key: "portfolio" },
-    { label: "About", href: "about.html", key: "about" },
-    { label: "Technologies", href: "technologies.html", key: "technologies" },
-    { label: "Blog", href: "blog.html", key: "blog" },
-    { label: "Contact", href: "contact.html", key: "contact" },
-    { label: "Case Studies", href: "case-studies.html", key: "case-studies" },
-    { label: "Testimonials", href: "index.html#testimonials", key: "testimonials" },
-    { label: "Careers", href: "careers.html", key: "careers" }
+    { label: "Home", href: isLocal ? "index.html" : "/", key: "home" },
+    { label: "Services", href: "services" + ext, key: "services" },
+    { label: "Portfolio", href: "portfolio" + ext, key: "portfolio" },
+    { label: "About", href: "about" + ext, key: "about" },
+    { label: "Technologies", href: "technologies" + ext, key: "technologies" },
+    { label: "Blog", href: "blog" + ext, key: "blog" },
+    { label: "Contact", href: "contact" + ext, key: "contact" },
+    { label: "Case Studies", href: "case-studies" + ext, key: "case-studies" },
+    { label: "Testimonials", href: (isLocal ? "index.html" : "/") + "#testimonials", key: "testimonials" },
+    { label: "Careers", href: "careers" + ext, key: "careers" }
   ];
 
   const pageKey = document.body.dataset.page || "";
@@ -64,7 +67,9 @@
     slot.innerHTML = `
       <header class="site-header fixed inset-x-0 top-0 z-50 bg-slate-950/75 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="index.html" class="text-lg font-semibold text-white">Encode <span class="text-cyan-300">Unlimited</span></a>
+          <a href="index.html" class="flex items-center">
+            <img src="../assets/images/logo-full.svg" alt="Encode Unlimited" class="h-12 w-auto">
+          </a>
           <nav class="hidden min-w-0 flex-1 items-center justify-center gap-5 overflow-x-auto whitespace-nowrap text-[13px] lg:flex">${desktopLinks}</nav>
           <a href="contact.html" class="btn-primary hidden xl:inline-flex">Start Project</a>
           <button id="mobile-menu-button" class="rounded-lg border border-slate-700 p-2 text-slate-100 lg:hidden" aria-label="Toggle navigation">
@@ -95,8 +100,14 @@
       <footer class="mt-20 border-t border-slate-800/80 bg-slate-950/70">
         <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           <div class="lg:col-span-2">
-            <h3 class="text-lg font-semibold text-white">Encode Unlimited</h3>
-            <p class="mt-3 max-w-md text-sm text-slate-300">We design and build scalable digital platforms for ambitious businesses worldwide. Product strategy, engineering, and support under one team.</p>
+            <div class="mb-6 flex items-center gap-4">
+              <img src="../assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto">
+              <div class="flex flex-col items-start leading-[0.8]">
+                <span class="text-5xl font-black tracking-tight text-white leading-none">ENCODE</span>
+                <span class="text-[0.98rem] font-bold tracking-[0.68em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+              </div>
+            </div>
+            <p class="mt-4 max-w-md text-sm text-slate-300">We design and build scalable digital platforms for ambitious businesses worldwide. Product strategy, engineering, and support under one team.</p>
           </div>
           <div>
             <h4 class="text-sm font-semibold uppercase tracking-wider text-cyan-300">Quick Links</h4>
@@ -141,30 +152,68 @@
     update();
   }
 
+  const GOOGLE_SCRIPT_URL = "YOUR_DEPLOYED_APPS_SCRIPT_URL_HERE"; // Replace after deployment
+
+  async function submitToGoogle(formData, formElement, resultElement, successMsg) {
+    if (GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
+      console.warn("Forms: Google Script URL not set. Submissions will only show visual feedback.");
+      return new Promise(resolve => setTimeout(resolve, 800)); // Simulating for UI
+    }
+
+    try {
+      // Use URLSearchParams for easier processing in Apps Script
+      const searchParams = new URLSearchParams();
+      for (const [key, value] of formData) {
+        searchParams.append(key, value);
+      }
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Apps Script Web App redirects
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: searchParams.toString()
+      });
+
+      return true;
+    } catch (err) {
+      console.error("Submission Error:", err);
+      return false;
+    }
+  }
+
   function initContactForm() {
     const form = document.getElementById("contact-form");
     const result = document.getElementById("form-result");
     if (!form || !result) return;
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
       const submit = form.querySelector("button[type='submit']");
       if (submit) {
         submit.disabled = true;
-        submit.textContent = "Submitting...";
+        submit.textContent = "Sending...";
       }
-      result.textContent = "Sending...";
-      result.className = "mt-4 text-sm text-cyan-300";
+      result.textContent = "Processing your request...";
+      result.className = "mt-4 text-sm text-[#7edc05]";
 
-      setTimeout(function () {
+      const formData = new FormData(form);
+      formData.append("formType", "contact");
+
+      const ok = await submitToGoogle(formData, form, result);
+
+      if (ok || GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
         result.textContent = "Thank you. Your message has been received. Our team will contact you shortly.";
         result.className = "mt-4 text-sm text-emerald-300";
         form.reset();
-        if (submit) {
-          submit.disabled = false;
-          submit.textContent = "Submit";
-        }
-      }, 900);
+      } else {
+        result.textContent = "Sorry, something went wrong. Please try again or email us directly.";
+        result.className = "mt-4 text-sm text-red-400";
+      }
+
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = "Submit Inquiry";
+      }
     });
   }
 
@@ -173,18 +222,27 @@
     const result = document.getElementById("newsletter-result");
     if (!form || !result) return;
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
+      const submit = form.querySelector("button[type='submit']");
+      if (submit) submit.disabled = true;
+
+      const formData = new FormData(form);
+      formData.append("formType", "newsletter");
+
+      await submitToGoogle(formData);
+
       result.textContent = "Subscribed. You will receive monthly product insights.";
       result.className = "mt-3 text-sm text-emerald-300";
       form.reset();
+      if (submit) submit.disabled = false;
     });
   }
 
   function animateCount(el) {
     const target = Number(el.dataset.count || 0);
     const suffix = el.dataset.suffix || "";
-    const duration = 1200;
+    const duration = 1500;
     const start = performance.now();
 
     function step(now) {
@@ -208,13 +266,17 @@
     const observer = new IntersectionObserver(
       function (entries, obs) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animateCount(entry.target);
+          // Lower threshold to 0.1 to trigger earlier, especially on mobile
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            // Small delay to wait for AOS to finish its initial fade/zoom
+            setTimeout(() => {
+              animateCount(entry.target);
+            }, 150);
             obs.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.1 }
     );
 
     counters.forEach(function (counter) {
@@ -300,7 +362,7 @@
     }
   }
 
-  
+
   function renderAiChatbot() {
     if (document.getElementById("ai-chatbot")) return;
     const wrap = document.createElement("div");
@@ -308,23 +370,45 @@
     wrap.innerHTML = `
       <div id="ai-chat-panel" class="hidden">
         <div class="ai-chat-head">
-          <p class="text-sm font-semibold text-white">AI Assistant</p>
-          <p class="text-xs text-slate-300">Ask about services, timeline, or urgent projects.</p>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-[#7edc05] flex items-center justify-center text-slate-900 border border-white/20">
+              <i data-lucide="bot" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-white leading-none">EUBOT <span class="ml-1 text-[10px] bg-white/10 px-1 rounded uppercase tracking-wider">AI v2.0</span></p>
+              <p class="text-[10px] text-emerald-400 mt-1 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online & Powerful</p>
+            </div>
+          </div>
         </div>
         <div id="ai-chat-messages" class="ai-chat-messages">
-          <div class="ai-msg bot">Hi, I am Encode AI Assistant. How can we help today?</div>
+          <div class="ai-msg bot">Hi! I'm <strong>EUBOT</strong>, Encode Unlimited's digital brain. How can I help you engineer your vision today?</div>
         </div>
         <div class="ai-quick">
-          <button type="button" data-ai-q="Need an urgent AI project">Urgent AI Project</button>
-          <button type="button" data-ai-q="What AI services do you offer?">AI Services</button>
-          <button type="button" data-ai-q="How fast can you start?">Start Timeline</button>
+          <button type="button" data-ai-q="Tell me about ERP systems">ERP Expertise</button>
+          <button type="button" data-ai-q="Government projects history">Gov Projects</button>
+          <button type="button" data-ai-q="How do you handle security?">System Security</button>
+          <button type="button" data-ai-q="What is the AI Urgent Track?">Urgent AI Track</button>
         </div>
         <div class="ai-chat-input">
-          <input id="ai-chat-input" type="text" placeholder="Type your message..." />
-          <button id="ai-chat-send" type="button">Send</button>
+          <input id="ai-chat-input" type="text" placeholder="Ask EUBOT anything..." />
+          <button id="ai-chat-send" type="button"><i data-lucide="send" class="w-4 h-4"></i></button>
         </div>
       </div>
-      <button id="ai-chat-toggle" type="button" aria-label="Toggle AI chatbot">AI</button>
+      <button id="ai-chat-toggle" type="button" class="group relative flex items-center justify-center" aria-label="Toggle EUBOT">
+        <!-- Pulse Glow Layer -->
+        <span class="absolute inset-0 rounded-full bg-[#7edc05]/20 animate-ping"></span>
+        
+        <!-- Online Badge -->
+        <span class="absolute top-0 right-0 z-10 flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-slate-900"></span>
+        </span>
+        
+        <!-- Icon Container -->
+        <div class="relative z-0 w-12 h-12 rounded-full border-2 border-[#7edc05]/50 bg-slate-900 flex items-center justify-center text-[#7edc05] group-hover:border-[#7edc05] group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all duration-300">
+           <i data-lucide="bot" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+        </div>
+      </button>
     `;
     document.body.appendChild(wrap);
   }
@@ -339,11 +423,122 @@
 
     function botReply(text) {
       const t = text.toLowerCase();
-      if (t.includes("urgent")) return "For urgent AI projects, use the Urgent AI form on Home or Contact page. We can respond within 1 hour.";
-      if (t.includes("service") || t.includes("ai")) return "We offer AI chatbot development, workflow automation, predictive analytics, and AI integration with existing systems.";
-      if (t.includes("start") || t.includes("timeline")) return "Standard kickoff is 7-10 days. Urgent AI tracks can start in 24-48 hours after scope confirmation.";
-      if (t.includes("price") || t.includes("cost")) return "Share your scope via Contact or Urgent AI form. We will provide a practical estimate quickly.";
-      return "Thanks. I can help with AI services, urgent project intake, timelines, and integration strategy.";
+
+      const qa = [
+        // --- IDENTITY & GREETINGS ---
+        {
+          keys: ["who are you", "what is your name", "eubot", "who is this", "identity"],
+          ans: "I am **EUBOT v2.0**, Encode Unlimited's AI brain. I'm trained on our entire portfolio and engineering standards. How can I help you engineering your vision today?"
+        },
+        {
+          keys: ["hi", "hello", "hey", "greet", "good morning", "good evening", "how are you", "suwa"],
+          ans: "Greetings! I'm EUBOT. I'm currently analyzing global tech trends. Are we architecting a local solution or a global platform today?"
+        },
+
+        // --- SRI LANKAN CONTEXT (PAYMENTS, TAX, LOCAL POS) ---
+        {
+          keys: ["payment gateway", "payhere", "webxpay", "lanka", "local payment", "direct pay", "koko", "mintpay"],
+          ans: "We specialize in **Sri Lankan payment integrations**. We possess deep experience with **PayHere**, **WEBXPAY**, and **DirectPay**. We also implement 'Buy Now Pay Later' solutions like Koko and Mintpay for local eCommerce."
+        },
+        {
+          keys: ["vat", "tax", "sscl", "billing", "invoice", "compliance", "sri lanka tax"],
+          ans: "Our billing systems are fully compliant with Sri Lankan tax regulations, including **VAT** and **SSCL** calculations. We ensure your POS or ERP generates legally valid invoices for the local market."
+        },
+        {
+          keys: ["pharmacy", "medical", "dispensary", "drug", "prescription"],
+          ans: "We build specialized **Pharmacy Management Systems**. Features include drug expiry tracking, batch management, prescription history, and SLMC-compliant record keeping."
+        },
+
+        // --- GLOBAL CONTEXT (STANDARDS, CLOUD, GLOBAL PAYMENTS) ---
+        {
+          keys: ["global", "international", "stripe", "paypal", "2checkout", "worldpay"],
+          ans: "For international markets, we integrate global standard gateways like **Stripe**, **PayPal**, and **2Checkout**. We handle multi-currency conversions and global PCI-DSS compliance."
+        },
+        {
+          keys: ["standards", "gdpr", "iso", "security compliance", "privacy"],
+          ans: "We adhere to international engineering standards. Our systems can be built to be **GDPR compliant** for the EU market, focusing on data encryption and user privacy rights."
+        },
+        {
+          keys: ["architecture", "microservices", "scalable", "serverless", "distributed"],
+          ans: "We design for massive scale. Using **Microservices** and **Serverless** architectures on AWS/Azure, we ensure your system can handle millions of users globally without downtime."
+        },
+
+        // --- CORE SERVICES (DEEP) ---
+        {
+          keys: ["service", "what you build", "offer", "capabilities", "product", "software", "development"],
+          ans: "We engineer enterprise-grade solutions: \n1. **ERP & POS**: Custom retail/wholesale engines. \n2. **AI & Automation**: Intelligent bots and predictive models. \n3. **Mobile Ecosystems**: Native iOS & Android apps. \n4. **GovTech**: Secure government digitalization and auditing."
+        },
+        {
+          keys: ["pos", "point of sale", "billing", "retail system", "shop software", "inventory", "stock", "management"],
+          ans: "Our POS systems are built for speed and 100% inventory accuracy. We offer multi-store sync, barcode automation, and profit analytics. Check our 'Danesha Bookshop' case study for a real example!"
+        },
+        {
+          keys: ["erp", "enterprise resource planning", "management system", "business software"],
+          ans: "Our ERPs unify Finance, HR, Supply Chain, and CRM. They are built using scalable architectures to handle millions of transactions securely."
+        },
+        {
+          keys: ["ai", "machine learning", "automation", "intelligence", "chatbot"],
+          ans: "From automated document processing to intelligent chatbots (like me!), we use AI to eliminate redundancy and drive data-backed decisions."
+        },
+
+        // --- SPECIFIC PROJECTS & CLIENTS ---
+        {
+          keys: ["portfolio", "project", "work", "example", "done", "case study", "clients"],
+          ans: "We've delivered **50+ successful projects**. Key highlights: \n- **Freshworld.lk**: High-end eCommerce. \n- **IRD Platform**: GovTech workflow automation. \n- **Danesha Bookshop**: Retail engine. \n- **Horana Tools**: Industrial inventory management."
+        },
+        {
+          keys: ["freshworld", "ecommerce", "online shop", "grocery", "shopping"],
+          ans: "Freshworld.lk is a high-traffic grocery platform we built with real-time stock sync and multi-vendor delivery dispatch logic."
+        },
+        {
+          keys: ["ird", "government", "gov", "department", "document", "tracking"],
+          ans: "For the IRD, we built a highly secure document tracking engine that manages critical files with full audit trails and user permissions."
+        },
+
+        // --- STATS & HISTORY ---
+        {
+          keys: ["stats", "numbers", "how many", "experience", "how old", "years", "track record"],
+          ans: "Encode Unlimited by the numbers: \n- **7+ Years** of engineering experience. \n- **50+ Projects** delivered successfully. \n- **20+ Expert Engineers** globally. \n- **100% Quality** delivery satisfaction."
+        },
+
+        // --- LOCATION & CONTACT ---
+        {
+          keys: ["where", "location", "place", "office", "horana", "kubuka", "address", "map", "sri lanka", "visit"],
+          ans: "Our primary engineering headquarters is in **Kubuka, Horana, Sri Lanka**. We operate 24/7 for global clients but our heart is in Horana."
+        },
+        {
+          keys: ["contact", "call", "phone", "email", "number", "talk", "human", "mobile"],
+          ans: "Need a human expert? Reach us at: \n📞 **+94 70 62 91 709** \n📧 **info@encodeunlimited.com** \nWe usually respond in under 4 hours."
+        },
+
+        // --- URGENT TRACK ---
+        {
+          keys: ["urgent", "fast", "emergency", "immediately", "quick", "asap", "deadline", "soon"],
+          ans: "Facing a tight deadline? Our **AI Urgent Track** can get a squad mobilized and starting delivery in 24-48 hours. Fill the 'Need AI Delivery Fast?' form on the home page!"
+        },
+
+        // --- TECHNOLOGY & SECURITY ---
+        {
+          keys: ["tech", "language", "stack", "react", "python", "node", "php", "javascript", "framework", "database", "sql"],
+          ans: "We use cutting-edge tech stacks: \n- **Frontend**: React, Next.js, Vue. \n- **Backend**: Node.js, Python (FastAPI/Django). \n- **Mobile**: Flutter, SwiftUI. \n- **Cloud**: AWS, Google Cloud, Azure."
+        },
+        {
+          keys: ["security", "safe", "hack", "data", "protect", "encrypted", "privacy"],
+          ans: "Security is non-negotiable. We use AES-256 encryption, SSL-only traffic, and secure API gateways to ensure your data remains impenetrable."
+        },
+
+        // --- MISSION & CULTURE ---
+        {
+          keys: ["mission", "vision", "goal", "why", "believe", "culture", "dna"],
+          ans: "We live by our motto: **'Engineering Your Vision Into Reality'**. Our culture is rooted in rapid innovation, transparency, and automation of the digital future."
+        }
+      ];
+
+      for (const item of qa) {
+        if (item.keys.some(k => t.includes(k))) return item.ans;
+      }
+
+      return "I'm EUBOT, and I'm currently parsing our extensive project database for that. Try asking about our **7+ years experience**, **Specific project case studies (like IRD)**, or our **Office location in Horana**.";
     }
 
     function pushMsg(role, text) {
@@ -386,17 +581,71 @@
     const result = document.getElementById("urgent-ai-result");
     if (!form || !result) return;
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
-      result.className = "mt-3 text-sm text-cyan-300";
-      result.textContent = "Submitting urgent request...";
-      setTimeout(function () {
-        result.className = "mt-3 text-sm text-emerald-300";
-        result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
-        form.reset();
-      }, 700);
+      const submit = form.querySelector("button[type='submit']");
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = "Sending Urgent Request...";
+      }
+      result.className = "mt-3 text-sm text-[#7edc05]";
+      result.textContent = "Processing urgent intake...";
+
+      const formData = new FormData(form);
+      formData.append("formType", "urgent-ai");
+
+      await submitToGoogle(formData);
+
+      result.className = "mt-3 text-sm text-emerald-300";
+      result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
+      form.reset();
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = "Submit Urgent Request";
+      }
     });
   }
+  function renderGlobalUi() {
+    const body = document.body;
+    if (!document.getElementById("scroll-progress")) {
+      const sp = document.createElement("div");
+      sp.id = "scroll-progress";
+      body.appendChild(sp);
+    }
+    if (!document.getElementById("back-to-top")) {
+      const btt = document.createElement("button");
+      btt.id = "back-to-top";
+      btt.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
+      btt.ariaLabel = "Back to top";
+      body.appendChild(btt);
+      btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+    if (!document.getElementById("mouse-glow")) {
+      const glow = document.createElement("div");
+      glow.id = "mouse-glow";
+      body.appendChild(glow);
+    }
+  }
+
+  function initMouseEffects() {
+    const body = document.body;
+    const cards = document.querySelectorAll(".card, .media-frame, .testimonial-shell");
+
+    window.addEventListener("mousemove", e => {
+      body.style.setProperty("--mouse-x", `${e.clientX}px`);
+      body.style.setProperty("--mouse-y", `${e.clientY}px`);
+
+      // Spotlight effect for cards
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      });
+    });
+  }
+
   function initAOSLibrary() {
     if (window.AOS) {
       window.AOS.init({
@@ -423,11 +672,8 @@
     initTiltCards();
     initLucideIcons();
     initAOSLibrary();
+    initMouseEffects();
   });
 })();
-
-
-
-
 
 
