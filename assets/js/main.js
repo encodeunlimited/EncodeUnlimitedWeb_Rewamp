@@ -67,8 +67,12 @@
     slot.innerHTML = `
       <header class="site-header fixed inset-x-0 top-0 z-50 bg-slate-950/75 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="index.html" class="flex items-center">
-            <img src="../assets/images/logo-full.svg" alt="Encode Unlimited" class="h-12 w-auto">
+          <a href="${isLocal ? 'index.html' : '/'}" class="flex items-center gap-2.5">
+            <img src="../assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto">
+            <div class="flex flex-col leading-[0.65] items-start">
+              <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
+              <span class="text-[0.72rem] font-bold tracking-[0.34em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+            </div>
           </a>
           <nav class="hidden min-w-0 flex-1 items-center justify-center gap-5 overflow-x-auto whitespace-nowrap text-[13px] lg:flex">${desktopLinks}</nav>
           <a href="contact.html" class="btn-primary hidden xl:inline-flex">Start Project</a>
@@ -102,9 +106,9 @@
           <div class="lg:col-span-2">
             <div class="mb-6 flex items-center gap-4">
               <img src="../assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto">
-              <div class="flex flex-col items-start leading-[0.8]">
+              <div class="flex flex-col items-start leading-[0.72]">
                 <span class="text-5xl font-black tracking-tight text-white leading-none">ENCODE</span>
-                <span class="text-[0.98rem] font-bold tracking-[0.68em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+                <span class="text-[1.05rem] font-bold tracking-[0.55em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
               </div>
             </div>
             <p class="mt-4 max-w-md text-sm text-slate-300">We design and build scalable digital platforms for ambitious businesses worldwide. Product strategy, engineering, and support under one team.</p>
