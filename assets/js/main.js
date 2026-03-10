@@ -300,6 +300,103 @@
     }
   }
 
+  
+  function renderAiChatbot() {
+    if (document.getElementById("ai-chatbot")) return;
+    const wrap = document.createElement("div");
+    wrap.id = "ai-chatbot";
+    wrap.innerHTML = `
+      <div id="ai-chat-panel" class="hidden">
+        <div class="ai-chat-head">
+          <p class="text-sm font-semibold text-white">AI Assistant</p>
+          <p class="text-xs text-slate-300">Ask about services, timeline, or urgent projects.</p>
+        </div>
+        <div id="ai-chat-messages" class="ai-chat-messages">
+          <div class="ai-msg bot">Hi, I am Encode AI Assistant. How can we help today?</div>
+        </div>
+        <div class="ai-quick">
+          <button type="button" data-ai-q="Need an urgent AI project">Urgent AI Project</button>
+          <button type="button" data-ai-q="What AI services do you offer?">AI Services</button>
+          <button type="button" data-ai-q="How fast can you start?">Start Timeline</button>
+        </div>
+        <div class="ai-chat-input">
+          <input id="ai-chat-input" type="text" placeholder="Type your message..." />
+          <button id="ai-chat-send" type="button">Send</button>
+        </div>
+      </div>
+      <button id="ai-chat-toggle" type="button" aria-label="Toggle AI chatbot">AI</button>
+    `;
+    document.body.appendChild(wrap);
+  }
+
+  function initAiChatbot() {
+    const toggle = document.getElementById("ai-chat-toggle");
+    const panel = document.getElementById("ai-chat-panel");
+    const input = document.getElementById("ai-chat-input");
+    const send = document.getElementById("ai-chat-send");
+    const msgs = document.getElementById("ai-chat-messages");
+    if (!toggle || !panel || !input || !send || !msgs) return;
+
+    function botReply(text) {
+      const t = text.toLowerCase();
+      if (t.includes("urgent")) return "For urgent AI projects, use the Urgent AI form on Home or Contact page. We can respond within 1 hour.";
+      if (t.includes("service") || t.includes("ai")) return "We offer AI chatbot development, workflow automation, predictive analytics, and AI integration with existing systems.";
+      if (t.includes("start") || t.includes("timeline")) return "Standard kickoff is 7-10 days. Urgent AI tracks can start in 24-48 hours after scope confirmation.";
+      if (t.includes("price") || t.includes("cost")) return "Share your scope via Contact or Urgent AI form. We will provide a practical estimate quickly.";
+      return "Thanks. I can help with AI services, urgent project intake, timelines, and integration strategy.";
+    }
+
+    function pushMsg(role, text) {
+      const el = document.createElement("div");
+      el.className = "ai-msg " + role;
+      el.textContent = text;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function submitUserMessage(text) {
+      const val = (text || input.value).trim();
+      if (!val) return;
+      pushMsg("user", val);
+      if (!text) input.value = "";
+      setTimeout(function () {
+        pushMsg("bot", botReply(val));
+      }, 280);
+    }
+
+    toggle.addEventListener("click", function () {
+      panel.classList.toggle("hidden");
+      if (!panel.classList.contains("hidden")) input.focus();
+    });
+
+    send.addEventListener("click", function () { submitUserMessage(); });
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") submitUserMessage();
+    });
+
+    document.querySelectorAll("[data-ai-q]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        submitUserMessage(btn.dataset.aiQ || "");
+      });
+    });
+  }
+
+  function initUrgentAiForm() {
+    const form = document.getElementById("urgent-ai-form");
+    const result = document.getElementById("urgent-ai-result");
+    if (!form || !result) return;
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      result.className = "mt-3 text-sm text-cyan-300";
+      result.textContent = "Submitting urgent request...";
+      setTimeout(function () {
+        result.className = "mt-3 text-sm text-emerald-300";
+        result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
+        form.reset();
+      }, 700);
+    });
+  }
   function initAOSLibrary() {
     if (window.AOS) {
       window.AOS.init({
@@ -312,11 +409,14 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     renderGlobalUi();
+    renderAiChatbot();
     renderNav();
     renderFooter();
     initScrollEffects();
     initContactForm();
     initNewsletterForm();
+    initUrgentAiForm();
+    initAiChatbot();
     initCounters();
     initPortfolioFilters();
     initTypedHero();
@@ -325,6 +425,7 @@
     initAOSLibrary();
   });
 })();
+
 
 
 
