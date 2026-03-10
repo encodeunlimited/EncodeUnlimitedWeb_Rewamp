@@ -1,0 +1,14 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'>
+  <defs>
+    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#0b1220'/>
+      <stop offset='100%' stop-color='#5da404'/>
+    </linearGradient>
+  </defs>
+  <rect width='1600' height='900' fill='url(#g)'/>
+  <rect x='80' y='80' width='1440' height='740' rx='26' fill='rgba(2,6,23,0.36)' stroke='rgba(126,220,5,0.35)'/>
+  <circle cx='220' cy='180' r='170' fill='rgba(126,220,5,0.16)'/>
+  <circle cx='1380' cy='740' r='220' fill='rgba(93,164,4,0.20)'/>
+  <text x='170' y='420' fill='#f1f5f9' font-size='72' font-family='Segoe UI, Arial, sans-serif'>Build With Us</text>
+  <text x='170' y='500' fill='#d9f99d' font-size='38' font-family='Segoe UI, Arial, sans-serif'>High-Trust Engineering Teams</text>
+</svg>

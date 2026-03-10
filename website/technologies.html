@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Technology stack used by Encode Unlimited for frontend, backend, databases, and tools." />
+  <title>Technologies | Encode Unlimited</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="../assets/css/global.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body data-page="technologies" class="text-slate-100 antialiased">
+  <div id="site-nav"></div>
+  <main>
+    <section class="page-hero">
+      <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div>
+          <h1 class="text-4xl font-bold text-white" data-aos="fade-up">Technologies</h1>
+          <p class="mt-4 max-w-3xl text-slate-300" data-aos="fade-up" data-aos-delay="120">Production-ready stack choices selected for speed, scalability, and maintainability.</p>
+          <div class="mt-6 flex flex-wrap gap-2" data-aos="fade-up" data-aos-delay="180">
+            <span class="badge-soft">Cloud Native</span>
+            <span class="badge-soft">API First</span>
+            <span class="badge-soft">Performance Driven</span>
+          </div>
+        </div>
+        <div class="media-frame h-72 lg:h-80" data-aos="zoom-in">
+          <img src="../assets/images/tech-stack.svg" alt="Encode Unlimited technology blueprint" />
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8" x-data="{ tab: 'frontend' }">
+      <div class="card" data-no-tilt data-aos="fade-up">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold text-white">Stack Navigator</h2>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="tech-tab" :class="tab === 'frontend' ? 'is-active' : ''" @click="tab='frontend'">Frontend</button>
+            <button type="button" class="tech-tab" :class="tab === 'backend' ? 'is-active' : ''" @click="tab='backend'">Backend</button>
+            <button type="button" class="tech-tab" :class="tab === 'database' ? 'is-active' : ''" @click="tab='database'">Database</button>
+            <button type="button" class="tech-tab" :class="tab === 'tools' ? 'is-active' : ''" @click="tab='tools'">Tools</button>
+          </div>
+        </div>
+
+        <div class="mt-7 min-h-[250px] md:min-h-[220px]">
+          <div x-cloak x-show="tab === 'frontend'" x-transition.opacity.duration.250ms>
+            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">HTML / CSS</p><p class="mt-2 text-sm text-slate-300">Semantic layout, responsive systems, modern utility-first UI.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 96%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">JavaScript</p><p class="mt-2 text-sm text-slate-300">Interactive frontend logic and modular architecture.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 94%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">React / Vue</p><p class="mt-2 text-sm text-slate-300">Scalable component-driven interfaces and dashboards.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 92%"></div></div></div>
+            </div>
+          </div>
+
+          <div x-cloak x-show="tab === 'backend'" x-transition.opacity.duration.250ms>
+            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">Node.js</p><p class="mt-2 text-sm text-slate-300">Event-driven APIs and service orchestration.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 92%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">Laravel</p><p class="mt-2 text-sm text-slate-300">Robust business logic, authentication, and admin flows.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 90%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">PHP</p><p class="mt-2 text-sm text-slate-300">Reliable backend systems for enterprise web products.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 86%"></div></div></div>
+            </div>
+          </div>
+
+          <div x-cloak x-show="tab === 'database'" x-transition.opacity.duration.250ms>
+            <div class="grid gap-5 md:grid-cols-2">
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">PostgreSQL</p><p class="mt-2 text-sm text-slate-300">High-integrity relational modeling and analytics pipelines.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 93%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">MySQL</p><p class="mt-2 text-sm text-slate-300">High-performance transactional systems and SaaS storage.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 91%"></div></div></div>
+            </div>
+          </div>
+
+          <div x-cloak x-show="tab === 'tools'" x-transition.opacity.duration.250ms>
+            <div class="grid gap-5 md:grid-cols-3">
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">Git</p><p class="mt-2 text-sm text-slate-300">Branch strategy, code review, release flow discipline.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 95%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">Docker</p><p class="mt-2 text-sm text-slate-300">Consistent local-dev and deployment environments.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 88%"></div></div></div>
+              <div class="rounded-xl border border-slate-700 bg-slate-900/70 p-4"><p class="text-sm text-cyan-300">Cloud Hosting</p><p class="mt-2 text-sm text-slate-300">Auto-scalable workloads with secure production operations.</p><div class="mt-3 skill-track"><div class="skill-fill" style="width: 90%"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <article class="card" data-aos="fade-up">
+          <h2 class="text-xl font-semibold text-white">Delivery Toolchain</h2>
+          <p class="mt-3 text-sm text-slate-300">From local commits to production releases, our pipeline emphasizes speed and reliability.</p>
+          <ul class="feature-list mt-5 space-y-2 text-sm text-slate-300">
+            <li>Automated CI checks and deployment gates</li>
+            <li>Containerized workloads for consistent environments</li>
+            <li>Monitoring, alerts, and rollback-ready releases</li>
+          </ul>
+        </article>
+        <div class="media-frame h-64" data-aos="zoom-in"><img src="../assets/images/tech-pipeline.svg" alt="Delivery pipeline and cloud operations visual" /></div>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3" data-aos="fade-up">
+        <article class="card text-center"><p class="metric-value text-4xl font-bold text-cyan-300" data-count="99" data-suffix="%">0%</p><p class="mt-2 text-sm text-slate-300">Deployment Success Rate</p></article>
+        <article class="card text-center"><p class="metric-value text-4xl font-bold text-cyan-300" data-count="40" data-suffix="+">0+</p><p class="mt-2 text-sm text-slate-300">Production Integrations</p></article>
+        <article class="card text-center"><p class="metric-value text-4xl font-bold text-cyan-300" data-count="24" data-suffix="/7">0/7</p><p class="mt-2 text-sm text-slate-300">Monitoring Coverage</p></article>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

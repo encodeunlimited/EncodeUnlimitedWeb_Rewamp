@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Encode Unlimited for software development, digital products, and engineering consultation." />
+  <title>Contact | Encode Unlimited</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="../assets/css/global.css" />
+</head>
+<body data-page="contact" class="text-slate-100 antialiased">
+  <div id="site-nav"></div>
+  <main>
+    <section class="page-hero">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold text-white" data-aos="fade-up">Contact Us</h1>
+        <p class="mt-4 max-w-3xl text-slate-300" data-aos="fade-up" data-aos-delay="120">Tell us about your project and we will respond with a practical execution plan.</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8" data-aos="fade-up">
+      <div class="media-frame h-52 md:h-64"><img src="../assets/images/contact-office.svg" alt="Encode Unlimited office and contact visual" /></div>
+    </section>
+
+    <section class="mx-auto grid max-w-7xl gap-6 px-4 pb-16 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <article class="card" data-aos="fade-up">
+        <h2 class="text-xl font-semibold text-white">Send a Message</h2>
+        <form id="contact-form" class="mt-5 space-y-4" novalidate>
+          <div><label class="mb-1 block text-sm text-slate-300" for="name">Name</label><input id="name" name="name" required class="w-full rounded-lg border border-slate-700 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400" type="text" /></div>
+          <div><label class="mb-1 block text-sm text-slate-300" for="email">Email</label><input id="email" name="email" required class="w-full rounded-lg border border-slate-700 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400" type="email" /></div>
+          <div><label class="mb-1 block text-sm text-slate-300" for="company">Company</label><input id="company" name="company" class="w-full rounded-lg border border-slate-700 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400" type="text" /></div>
+          <div><label class="mb-1 block text-sm text-slate-300" for="message">Message</label><textarea id="message" name="message" rows="4" required class="w-full rounded-lg border border-slate-700 bg-slate-900/80 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"></textarea></div>
+          <button type="submit" class="btn-primary">Submit</button>
+          <p id="form-result" aria-live="polite" class="mt-4 text-sm"></p>
+        </form>
+      </article>
+
+      <article class="card" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="text-xl font-semibold text-white">Company Info</h2>
+        <div class="mt-4 space-y-3 text-sm text-slate-300">
+          <p><strong class="text-cyan-300">Email:</strong> hello@encodeunlimited.com</p>
+          <p><strong class="text-cyan-300">Phone:</strong> +1 (555) 219-4400</p>
+          <p><strong class="text-cyan-300">Location:</strong> 220 Market Street, San Francisco, CA</p>
+        </div>
+        <div class="mt-5 overflow-hidden rounded-xl border border-slate-700">
+          <iframe title="Encode Unlimited location map" src="https://maps.google.com/maps?q=San%20Francisco&t=&z=12&ie=UTF8&iwloc=&output=embed" width="100%" height="280" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </article>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
