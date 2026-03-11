@@ -1,18 +1,16 @@
-﻿(function () {
-  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-  const ext = isLocal ? ".html" : "";
+(function () {
 
   const navItems = [
-    { label: "Home", href: isLocal ? "index.html" : "/", key: "home" },
-    { label: "Services", href: "services" + ext, key: "services" },
-    { label: "Portfolio", href: "portfolio" + ext, key: "portfolio" },
-    { label: "About", href: "about" + ext, key: "about" },
-    { label: "Technologies", href: "technologies" + ext, key: "technologies" },
-    { label: "Blog", href: "blog" + ext, key: "blog" },
-    { label: "Contact", href: "contact" + ext, key: "contact" },
-    { label: "Case Studies", href: "case-studies" + ext, key: "case-studies" },
-    { label: "Testimonials", href: (isLocal ? "index.html" : "/") + "#testimonials", key: "testimonials" },
-    { label: "Careers", href: "careers" + ext, key: "careers" }
+    { label: "Home", href: "index.html", key: "home" },
+    { label: "Services", href: "services.html", key: "services" },
+    { label: "Portfolio", href: "portfolio.html", key: "portfolio" },
+    { label: "About", href: "about.html", key: "about" },
+    { label: "Technologies", href: "technologies.html", key: "technologies" },
+    { label: "Blog", href: "blog.html", key: "blog" },
+    { label: "Contact", href: "contact.html", key: "contact" },
+    { label: "Case Studies", href: "case-studies.html", key: "case-studies" },
+    { label: "Testimonials", href: "index.html#testimonials", key: "testimonials" },
+    { label: "Careers", href: "careers.html", key: "careers" }
   ];
 
   const pageKey = document.body.dataset.page || "";
@@ -67,7 +65,7 @@
     slot.innerHTML = `
       <header class="site-header fixed inset-x-0 top-0 z-50 bg-slate-950/75 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="${isLocal ? 'index.html' : '/'}" class="flex items-center gap-2.5">
+          <a href="index.html" class="flex items-center gap-2.5">
             <img src="../assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto">
             <div class="flex flex-col leading-[0.65] items-start">
               <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
