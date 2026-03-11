@@ -16,31 +16,35 @@
   const pageKey = document.body.dataset.page || "";
 
   function renderGlobalUi() {
+    const body = document.body;
     if (!document.getElementById("scroll-progress")) {
-      const progress = document.createElement("div");
-      progress.id = "scroll-progress";
-      document.body.appendChild(progress);
+      const sp = document.createElement("div");
+      sp.id = "scroll-progress";
+      body.appendChild(sp);
     }
-
+    
     if (!document.getElementById("quick-contact")) {
-      const quickContact = document.createElement("a");
-      quickContact.id = "quick-contact";
-      quickContact.href = "contact.html";
-      quickContact.className = "btn-primary hidden sm:inline-flex";
-      quickContact.textContent = "Start Project";
-      document.body.appendChild(quickContact);
+      const qc = document.createElement("a");
+      qc.id = "quick-contact";
+      qc.href = "contact.html";
+      qc.className = "btn-primary hidden sm:inline-flex";
+      qc.textContent = "Start Project";
+      body.appendChild(qc);
     }
 
     if (!document.getElementById("back-to-top")) {
-      const button = document.createElement("button");
-      button.id = "back-to-top";
-      button.type = "button";
-      button.setAttribute("aria-label", "Back to top");
-      button.innerHTML = "↑";
-      button.addEventListener("click", function () {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-      document.body.appendChild(button);
+      const btt = document.createElement("button");
+      btt.id = "back-to-top";
+      btt.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
+      btt.ariaLabel = "Back to top";
+      body.appendChild(btt);
+      btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+
+    if (!document.getElementById("mouse-glow")) {
+      const glow = document.createElement("div");
+      glow.id = "mouse-glow";
+      body.appendChild(glow);
     }
   }
 
@@ -154,24 +158,29 @@
     update();
   }
 
-  const GOOGLE_SCRIPT_URL = "YOUR_DEPLOYED_APPS_SCRIPT_URL_HERE"; // Replace after deployment
+  // Replace the placeholder below with the actual Web App URL from Google Apps Script deployment.
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcHlI7PMEa5IFy21Wk8rkQZjIQINdHa4d5KKPfiFVsY9Cf_KzmnJpfaB5mlDPIlTVh1w/exec"; // PLACEHOLDER: Please replace this!
 
-  async function submitToGoogle(formData, formElement, resultElement, successMsg) {
-    if (GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
-      console.warn("Forms: Google Script URL not set. Submissions will only show visual feedback.");
-      return new Promise(resolve => setTimeout(resolve, 800)); // Simulating for UI
+  async function submitToGoogle(formData) {
+    if (GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED") || GOOGLE_SCRIPT_URL.includes("AKfycbz")) {
+      console.warn("Forms: Google Script URL is missing or still using the placeholder. Please deploy your Google Apps Script and paste the Web App URL here.");
+      // If we are on localhost, we simulate a delay for testing purposes
+      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+          await new Promise(resolve => setTimeout(resolve, 800));
+          return true;
+      }
+      return false;
     }
 
     try {
-      // Use URLSearchParams for easier processing in Apps Script
       const searchParams = new URLSearchParams();
       for (const [key, value] of formData) {
         searchParams.append(key, value);
       }
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors", // Required for Google Apps Script Web App redirects
+        mode: "no-cors",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: searchParams.toString()
       });
@@ -201,14 +210,14 @@
       const formData = new FormData(form);
       formData.append("formType", "contact");
 
-      const ok = await submitToGoogle(formData, form, result);
+      const ok = await submitToGoogle(formData);
 
-      if (ok || GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
+      if (ok) {
         result.textContent = "Thank you. Your message has been received. Our team will contact you shortly.";
         result.className = "mt-4 text-sm text-emerald-300";
         form.reset();
       } else {
-        result.textContent = "Sorry, something went wrong. Please try again or email us directly.";
+        result.textContent = "Sorry, something went wrong. Please check your connection and ensure the script is deployed correctly.";
         result.className = "mt-4 text-sm text-red-400";
       }
 
@@ -232,11 +241,16 @@
       const formData = new FormData(form);
       formData.append("formType", "newsletter");
 
-      await submitToGoogle(formData);
+      const ok = await submitToGoogle(formData);
 
-      result.textContent = "Subscribed. You will receive monthly product insights.";
-      result.className = "mt-3 text-sm text-emerald-300";
-      form.reset();
+      if (ok) {
+          result.textContent = "Subscribed. You will receive monthly product insights.";
+          result.className = "mt-3 text-sm text-emerald-300";
+          form.reset();
+      } else {
+          result.textContent = "Subscription failed. Please try again later.";
+          result.className = "mt-3 text-sm text-red-400";
+      }
       if (submit) submit.disabled = false;
     });
   }
@@ -596,38 +610,23 @@
       const formData = new FormData(form);
       formData.append("formType", "urgent-ai");
 
-      await submitToGoogle(formData);
+      const ok = await submitToGoogle(formData);
 
-      result.className = "mt-3 text-sm text-emerald-300";
-      result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
-      form.reset();
+      if (ok) {
+          result.className = "mt-3 text-sm text-emerald-300";
+          result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
+          form.reset();
+      } else {
+          result.className = "mt-3 text-sm text-red-400";
+          result.textContent = "Upload failed. Please try again or contact us directly.";
+      }
       if (submit) {
         submit.disabled = false;
         submit.textContent = "Submit Urgent Request";
       }
     });
   }
-  function renderGlobalUi() {
-    const body = document.body;
-    if (!document.getElementById("scroll-progress")) {
-      const sp = document.createElement("div");
-      sp.id = "scroll-progress";
-      body.appendChild(sp);
-    }
-    if (!document.getElementById("back-to-top")) {
-      const btt = document.createElement("button");
-      btt.id = "back-to-top";
-      btt.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
-      btt.ariaLabel = "Back to top";
-      body.appendChild(btt);
-      btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-    }
-    if (!document.getElementById("mouse-glow")) {
-      const glow = document.createElement("div");
-      glow.id = "mouse-glow";
-      body.appendChild(glow);
-    }
-  }
+
 
   function initMouseEffects() {
     const body = document.body;
