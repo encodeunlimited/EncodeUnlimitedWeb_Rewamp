@@ -12,6 +12,10 @@
  * 8. Copy the 'Web App URL' and paste it into /assets/js/main.js
  */
 
+function doGet(e) {
+    return doPost(e);
+}
+
 function doPost(e) {
     try {
         var ss = SpreadsheetApp.getActiveSpreadsheet();

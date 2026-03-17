@@ -13,11 +13,9 @@
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     
     # Content Security Policy (CSP)
-    # Allows scripts from CDN used in the project
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://unpkg.com; img-src 'self' data: https:; connect-src 'self';"
+    Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://unpkg.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https:; frame-src 'self' https://www.google.com https://script.google.com;"
     
-    # Enable HSTS (Strict Transport Security) - ensures site is ONLY loaded over HTTPS
-    # Only enable this if you have an SSL certificate active on Hostinger
+    # Enable HSTS (Strict Transport Security)
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 </IfModule>
 
@@ -30,41 +28,37 @@ Options -Indexes
     Deny from all
 </FilesMatch>
 
-# Force HTTPS & Hande Clean URLs
+# Force HTTPS & Handle Clean URLs (Removing .html extension)
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    
+    RewriteBase /
+
     # 1. Force HTTPS
     RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
 
-    # 2. Redirect /website/index.html or /index.html to root /
-    RewriteCond %{THE_REQUEST} /website/index\.html [OR]
+    # 2. Redirect index.html to root /
     RewriteCond %{THE_REQUEST} /index\.html
-    RewriteRule ^.*$ / [L,R=301]
+    RewriteRule ^index\.html$ / [L,R=301]
 
-    # 3. Redirect any request ending in .html to the clean version
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /website/([^\ ]+)\.html\ HTTP/ [OR]
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.html\ HTTP/
-    RewriteRule ^.*$ /%1 [L,R=301]
+    # 3. Redirect example.html to example (External Redirect)
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+)\.html\ HTTP/
+    RewriteRule ^([^/]+)\.html$ /$1 [L,R=301]
 
-    # 4. Handle Internal mapping (Search in root first, then website/ directory)
-    # If it's the root /, serve website/index.html
-    RewriteRule ^$ website/index.html [L]
-
-    # If the file exists in website/ folder (without extension)
-    RewriteCond %{DOCUMENT_ROOT}/website/$1.html -f
-    RewriteRule ^([^/]+)/?$ website/$1.html [L]
+    # 4. Map clean URLs to .html files (Internal Mapping)
+    # Check if a .html file exists for the requested name
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.html -f
+    RewriteRule ^([^/]+)$ $1.html [L]
 </IfModule>
 
-# Tech Stack Obfuscation (Hide Server Signatures)
+# Tech Stack Obfuscation
 <IfModule mod_headers.c>
-    # Remove potentially identifying headers
     Header unset X-Powered-By
     Header always unset X-Powered-By
     Header unset Server
     Header always unset Server
 </IfModule>
 
-# Prevent server listing (Signature Off)
+# Prevent server listing
 ServerSignature Off

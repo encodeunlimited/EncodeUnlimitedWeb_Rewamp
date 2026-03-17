@@ -22,7 +22,7 @@
       sp.id = "scroll-progress";
       body.appendChild(sp);
     }
-    
+
     if (!document.getElementById("quick-contact")) {
       const qc = document.createElement("a");
       qc.id = "quick-contact";
@@ -70,7 +70,7 @@
       <header class="site-header fixed inset-x-0 top-0 z-50 bg-slate-950/75 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
           <a href="index.html" class="flex items-center gap-2.5">
-            <img src="../assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto">
+            <img src="assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto">
             <div class="flex flex-col leading-[0.65] items-start">
               <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
               <span class="text-[0.72rem] font-bold tracking-[0.34em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
@@ -107,7 +107,7 @@
         <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           <div class="lg:col-span-2">
             <div class="mb-6 flex items-center gap-4">
-              <img src="../assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto">
+              <img src="assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto">
               <div class="flex flex-col items-start leading-[0.72]">
                 <span class="text-5xl font-black tracking-tight text-white leading-none">ENCODE</span>
                 <span class="text-[1.05rem] font-bold tracking-[0.55em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
@@ -159,30 +159,24 @@
   }
 
   // Replace the placeholder below with the actual Web App URL from Google Apps Script deployment.
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcHlI7PMEa5IFy21Wk8rkQZjIQINdHa4d5KKPfiFVsY9Cf_KzmnJpfaB5mlDPIlTVh1w/exec"; // PLACEHOLDER: Please replace this!
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyTB-sZ_CdY10hmmJkTyHebTvj5Wm6AL_up3jl5oMcN6OkZU6r-oWEpXYF4O8rBy7faQ/exec"; // PLACEHOLDER: Please replace this!
 
   async function submitToGoogle(formData) {
-    if (GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED") || GOOGLE_SCRIPT_URL.includes("AKfycbz")) {
-      console.warn("Forms: Google Script URL is missing or still using the placeholder. Please deploy your Google Apps Script and paste the Web App URL here.");
-      // If we are on localhost, we simulate a delay for testing purposes
-      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-          await new Promise(resolve => setTimeout(resolve, 800));
-          return true;
-      }
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
+      console.warn("Forms: Google Script URL is missing.");
       return false;
     }
 
     try {
-      const searchParams = new URLSearchParams();
-      for (const [key, value] of formData) {
-        searchParams.append(key, value);
-      }
+      const params = new URLSearchParams();
+      formData.forEach((value, key) => params.append(key, value));
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
+        cache: "no-cache",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: searchParams.toString()
+        body: params.toString()
       });
 
       return true;
@@ -225,6 +219,12 @@
         submit.disabled = false;
         submit.textContent = "Submit Inquiry";
       }
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        result.textContent = "";
+        result.className = "mt-4 text-sm";
+      }, 5000);
     });
   }
 
@@ -244,14 +244,20 @@
       const ok = await submitToGoogle(formData);
 
       if (ok) {
-          result.textContent = "Subscribed. You will receive monthly product insights.";
-          result.className = "mt-3 text-sm text-emerald-300";
-          form.reset();
+        result.textContent = "Subscribed. You will receive monthly product insights.";
+        result.className = "mt-3 text-sm text-emerald-300";
+        form.reset();
       } else {
-          result.textContent = "Subscription failed. Please try again later.";
-          result.className = "mt-3 text-sm text-red-400";
+        result.textContent = "Subscription failed. Please try again later.";
+        result.className = "mt-3 text-sm text-red-400";
       }
       if (submit) submit.disabled = false;
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        result.textContent = "";
+        result.className = "mt-3 text-sm";
+      }, 5000);
     });
   }
 
@@ -613,17 +619,23 @@
       const ok = await submitToGoogle(formData);
 
       if (ok) {
-          result.className = "mt-3 text-sm text-emerald-300";
-          result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
-          form.reset();
+        result.className = "mt-3 text-sm text-emerald-300";
+        result.textContent = "Urgent AI request received. Our team will contact you within 1 hour.";
+        form.reset();
       } else {
-          result.className = "mt-3 text-sm text-red-400";
-          result.textContent = "Upload failed. Please try again or contact us directly.";
+        result.className = "mt-3 text-sm text-red-400";
+        result.textContent = "Upload failed. Please try again or contact us directly.";
       }
       if (submit) {
         submit.disabled = false;
         submit.textContent = "Submit Urgent Request";
       }
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        result.textContent = "";
+        result.className = "mt-3 text-sm";
+      }, 5000);
     });
   }
 
