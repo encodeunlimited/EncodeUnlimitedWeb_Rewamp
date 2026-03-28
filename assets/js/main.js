@@ -159,7 +159,7 @@
   }
 
   // Replace the placeholder below with the actual Web App URL from Google Apps Script deployment.
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyTB-sZ_CdY10hmmJkTyHebTvj5Wm6AL_up3jl5oMcN6OkZU6r-oWEpXYF4O8rBy7faQ/exec"; // PLACEHOLDER: Please replace this!
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyn0SLNFR3-7Wczw7LLwwGgpeDd0Zy51Te34EmgethxAkpf3FCl85XXlPm2y-zw2SMRJQ/exec"; // PLACEHOLDER: Please replace this!
 
   async function submitToGoogle(formData) {
     if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
@@ -170,6 +170,8 @@
     try {
       const params = new URLSearchParams();
       formData.forEach((value, key) => params.append(key, value));
+
+      console.log("Submitting form data to Google:", Object.fromEntries(params));
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
