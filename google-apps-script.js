@@ -1,15 +1,5 @@
 /**
- * GOOGLE APPS SCRIPT FOR ENCODE UNLIMITED
- * 
- * Instructions:
- * 1. Open your Google Sheet: https://docs.google.com/spreadsheets/d/1JgrmxTSWi0uDJNzpjKtNzGhEMjIUFB-vIJCXckz9SSQ/edit
- * 2. Go to 'Extensions' -> 'Apps Script'.
- * 3. Delete any code and paste this script.
- * 4. Click 'Deploy' -> 'New Deployment'.
- * 5. Select type 'Web App'.
- * 6. Set 'Execute As' to 'Me'.
- * 7. Set 'Who has access' to 'Anyone' (IMPORTANT).
- * 8. Copy the 'Web App URL' and paste it into /assets/js/main.js
+ * DEBUG READY GOOGLE APPS SCRIPT FOR ENCODE UNLIMITED
  */
 
 function doGet(e) {
@@ -20,32 +10,58 @@ function doPost(e) {
     try {
         var ss = SpreadsheetApp.getActiveSpreadsheet();
         var sheet = ss.getSheetByName("Submissions") || ss.getSheets()[0];
+        
+        // Log incoming data for debugging (Check 'Executions' tab to see this)
+        Logger.log("Incoming Data: " + JSON.stringify(e));
 
         // Create headers if empty
         if (sheet.getLastRow() === 0) {
-            sheet.appendRow(["Timestamp", "Form Type", "Name", "Email", "Company/Priority", "Message/Scope"]);
+            sheet.appendRow(["Timestamp", "Form Type", "Name", "Email", "Company/Priority", "Message/Scope", "Processed?"]);
         }
 
-        // Parse parameters
         var params = e.parameter;
         var type = params.formType || "Unknown";
-        var timestamp = new Date();
+        
+        var now = new Date();
+        var timestamp = Utilities.formatDate(now, "GMT+5:30", "yyyy-MM-dd HH:mm:ss");
 
         var rowData = [timestamp, type];
 
         if (type === "contact") {
-            rowData.push(params.name, params.email, params.company, params.message);
+            rowData.push(params.name || "N/A", params.email || "N/A", params.company || "N/A", params.message || "N/A");
         } else if (type === "urgent-ai") {
-            rowData.push(params.name, params.email, params.priority, params.scope);
+            rowData.push(params.name || "N/A", params.email || "N/A", params.priority || "N/A", params.scope || "N/A");
         } else if (type === "newsletter") {
-            rowData.push("Newsletter Subscriber", params.email, "N/A", "Subscribed to newsletter");
+            rowData.push("Newsletter Subscriber", params.email || "N/A", "N/A", "Subscribed to newsletter");
         } else {
             rowData.push(params.name || "N/A", params.email || "N/A", "N/A", JSON.stringify(params));
         }
 
-        sheet.appendRow(rowData);
+        // Add 'false' default for Column G (7th Column)
+        rowData.push(false);
 
-        // Send Email Notifications
+        // Find next empty row based on Column A (Timestamp)
+        var timestamps = sheet.getRange("A:A").getValues();
+        var nextRow = 1;
+        for (var i = 0; i < timestamps.length; i++) {
+            if (timestamps[i][0] == "" || timestamps[i][0] == null) {
+                nextRow = i + 1;
+                break;
+            }
+            if (i == timestamps.length - 1) nextRow = timestamps.length + 1;
+        }
+
+        Logger.log("Target Row: " + nextRow);
+
+        // Write row data
+        sheet.getRange(nextRow, 1, 1, rowData.length).setValues([rowData]);
+
+        // Add Checkbox Validation to Column G
+        var cell = sheet.getRange(nextRow, 7);
+        var rule = SpreadsheetApp.newDataValidation().requireCheckbox().build();
+        cell.setDataValidation(rule).setValue(false);
+
+        // --- EMAIL NOTIFICATION ---
         var recipients = [
             "info.encodeunlimited@gmail.com",
             "asanka.ird@gmail.com",
@@ -65,7 +81,7 @@ function doPost(e) {
             }
         }
 
-        emailBody += "\nView in Sheet: https://docs.google.com/spreadsheets/d/1JgrmxTSWi0uDJNzpjKtNzGhEMjIUFB-vIJCXckz9SSQ/edit";
+        emailBody += "\nView in Sheet: " + ss.getUrl();
 
         MailApp.sendEmail({
             to: recipients,
@@ -77,6 +93,7 @@ function doPost(e) {
             .setMimeType(ContentService.MimeType.JSON);
 
     } catch (error) {
+        Logger.log("Error logic: " + error.toString());
         return ContentService.createTextOutput(JSON.stringify({ "result": "error", "error": error.toString() }))
             .setMimeType(ContentService.MimeType.JSON);
     }

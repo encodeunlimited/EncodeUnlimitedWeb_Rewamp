@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
 
   const navItems = [
     { label: "Home", href: "index.html", key: "home" },
@@ -159,7 +159,7 @@
   }
 
   // Replace the placeholder below with the actual Web App URL from Google Apps Script deployment.
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyn0SLNFR3-7Wczw7LLwwGgpeDd0Zy51Te34EmgethxAkpf3FCl85XXlPm2y-zw2SMRJQ/exec"; // PLACEHOLDER: Please replace this!
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdLaT730bhZBExRw1Be73zJGiitptL3LRN_a946vaR1n38wn098eDO3bRYMKACz6SR4A/exec";
 
   async function submitToGoogle(formData) {
     if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_DEPLOYED")) {
