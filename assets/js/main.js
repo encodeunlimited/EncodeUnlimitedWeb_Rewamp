@@ -607,18 +607,41 @@
     if (!cards.length || !modal) return;
 
     function openModal(card) {
-      const title = card.querySelector("h2").textContent;
-      const desc = card.querySelector("p.text-sm").textContent;
-      const tech = card.querySelector("p.text-xs").textContent;
-      const img = card.querySelector("img").src;
+      const title = card.querySelector("h2")?.textContent || "Project Details";
+      const shortDesc = card.querySelector("p.text-sm")?.textContent || "";
+      const fullDesc = card.dataset.fullDesc || shortDesc;
+      const tech = card.querySelector("p.text-xs")?.textContent || "";
+      const img = card.querySelector("img")?.src || "";
       const category = card.dataset.category || "Project Information";
+      const features = (card.dataset.features || "").split("|").filter(Boolean);
 
-      document.getElementById("modal-img").src = img;
-      document.getElementById("modal-title").textContent = title;
-      document.getElementById("modal-desc").textContent = desc;
-      document.getElementById("modal-tech").textContent = tech;
-      document.getElementById("modal-category").textContent = category;
-      document.getElementById("modal-industry").textContent = category.charAt(0).toUpperCase() + category.slice(1);
+      const modalImg = document.getElementById("modal-img");
+      const modalTitle = document.getElementById("modal-title");
+      const modalDesc = document.getElementById("modal-desc");
+      const modalTech = document.getElementById("modal-tech");
+      const modalCategory = document.getElementById("modal-category");
+      const modalIndustry = document.getElementById("modal-industry");
+      const modalFeatures = document.getElementById("modal-features");
+      const modalFeaturesContainer = document.getElementById("modal-features-container");
+
+      if (modalImg) modalImg.src = img;
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalDesc) modalDesc.textContent = fullDesc;
+      if (modalTech) modalTech.textContent = tech;
+      if (modalCategory) modalCategory.textContent = category;
+      if (modalIndustry) modalIndustry.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+
+      if (modalFeatures) {
+        modalFeatures.innerHTML = features.map(f => `
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#7edc05]"></span>
+            ${f.trim()}
+          </li>
+        `).join("");
+      }
+      if (modalFeaturesContainer) {
+        modalFeaturesContainer.classList.toggle("hidden", features.length === 0);
+      }
 
       modal.classList.remove("hidden");
       document.body.style.overflow = "hidden";
@@ -680,15 +703,21 @@
     `;
 
     function openModal(card) {
-      const title = card.querySelector("h2").textContent;
-      const date = card.querySelector("p.text-xs").textContent;
-      const img = card.querySelector("img").src;
+      const title = card.querySelector("h2")?.textContent || "Article Title";
+      const date = card.querySelector("p.text-xs")?.textContent || "";
+      const img = card.querySelector("img")?.src || "";
       const body = blogContent[title] || defaultContent;
 
-      document.getElementById("blog-modal-img").src = img;
-      document.getElementById("blog-modal-title").textContent = title;
-      document.getElementById("blog-modal-date").textContent = date;
-      document.getElementById("blog-modal-body").innerHTML = body;
+      const modalImg = document.getElementById("blog-modal-img");
+      const modalTitle = document.getElementById("blog-modal-title");
+      const modalDate = document.getElementById("blog-modal-date");
+      const modalBody = document.getElementById("blog-modal-body");
+
+      if (modalImg) modalImg.src = img;
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalDate) modalDate.textContent = date;
+      if (modalBody) modalBody.textContent = ""; // Reset body
+      if (modalBody) modalBody.innerHTML = body;
 
       modal.classList.remove("hidden");
       document.body.style.overflow = "hidden";
