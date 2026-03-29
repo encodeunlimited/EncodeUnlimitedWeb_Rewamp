@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 
   const navItems = [
     { label: "Home", href: "index.html", key: "home" },
@@ -599,6 +599,125 @@
       });
     });
   }
+  
+  function initPortfolioModal() {
+    const cards = document.querySelectorAll("[data-project-card]");
+    const modal = document.getElementById("project-modal");
+    const closeBtn = document.getElementById("close-modal");
+    if (!cards.length || !modal) return;
+
+    function openModal(card) {
+      const title = card.querySelector("h2").textContent;
+      const desc = card.querySelector("p.text-sm").textContent;
+      const tech = card.querySelector("p.text-xs").textContent;
+      const img = card.querySelector("img").src;
+      const category = card.dataset.category || "Project Information";
+
+      document.getElementById("modal-img").src = img;
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-desc").textContent = desc;
+      document.getElementById("modal-tech").textContent = tech;
+      document.getElementById("modal-category").textContent = category;
+      document.getElementById("modal-industry").textContent = category.charAt(0).toUpperCase() + category.slice(1);
+
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
+
+    cards.forEach(card => {
+      card.classList.add("cursor-pointer");
+      card.addEventListener("click", () => openModal(card));
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    // Support ESC key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+    });
+  }
+
+  function initBlogModal() {
+    const cards = document.querySelectorAll("[data-blog-card]");
+    const modal = document.getElementById("blog-modal");
+    const closeBtn = document.getElementById("close-blog-modal");
+    if (!cards.length || !modal) return;
+
+    const blogContent = {
+      "AI Agents: The Next Evolution of Digital Workforces": `
+        <p>In 2026, the boundary between passive software and active agents has blurred. AI Agents are no longer just responding to queries; they are executing complex multi-step workflows across different systems.</p>
+        <p>At Encode Unlimited, we are building agents that can handle supply chain logistics, automated code auditing, and even proactive customer support that resolves issues before the user notices them. The key is <strong>autonomy</strong>—giving the AI the tools to 'think' and 'act' rather than just 'show'.</p>
+        <p>Businesses adopting agentic workflows are seeing a 40% reduction in operational overhead within the first quarter of deployment. This isn't just automation; it's a digital workforce expansion.</p>
+      `,
+      "Optimizing for Local Speed with Edge Computing": `
+        <p>For Sri Lankan users, every millisecond counts. Traditionally, data residing in US or EU data centers created noticeable 'lag' during high-traffic sessions. Edge computing changes this narrative by bringing processing power to the network's periphery.</p>
+        <p>We deploy critical application logic to edge nodes globally, ensuring that a user in Colombo or Kandy receives a response in sub-30ms. This is critical for real-time inventory systems and high-frequency trading platforms.</p>
+        <p>By leveraging platforms like Cloudflare Workers and AWS Lambda@Edge, we've helped local retailers sustain performance even during massive holiday sales peaks.</p>
+      `,
+      "Protecting Your Digital Assets in an Interconnected World": `
+        <p>Cyber threats are becoming more sophisticated, targeting small to medium local businesses with global-tier ransomware. A 'firewall' is no longer enough; you need <strong>Zero Trust Architecture</strong>.</p>
+        <p>Our security protocols involve multi-factor authentication at every layer, end-to-end encryption for sitting and moving data, and continuous AI-driven threat monitoring.</p>
+        <p>We believe that security should be baked into the code from Day 1, not added as a patch on Day 100. Protecting your client data is protecting your business reputation.</p>
+      `,
+      "Designing SaaS Architecture for 10x Growth": `
+        <p>Scaling a SaaS product from 100 users to 100,000 requires more than just adding servers. It requires a fundamental shift in how you handle multi-tenancy and data isolation.</p>
+        <p>We focus on high-availability database clusters and event-driven architectures that can handle sudden spikes without affecting the performance of other tenants.</p>
+        <p>Architecture is a living entity—it must evolve as the product finds its market fit and expands into new territories.</p>
+      `
+    };
+
+    const defaultContent = `
+      <p>This article explores the technical depth and engineering challenges faced during modern product delivery. At Encode Unlimited, we prioritize clean code, scalable architecture, and user-centric design.</p>
+      <p>Continuous learning and adaptation are core to our engineering DNA. Stay tuned for more deep dives into our specific project implementations and technology stack updates.</p>
+    `;
+
+    function openModal(card) {
+      const title = card.querySelector("h2").textContent;
+      const date = card.querySelector("p.text-xs").textContent;
+      const img = card.querySelector("img").src;
+      const body = blogContent[title] || defaultContent;
+
+      document.getElementById("blog-modal-img").src = img;
+      document.getElementById("blog-modal-title").textContent = title;
+      document.getElementById("blog-modal-date").textContent = date;
+      document.getElementById("blog-modal-body").innerHTML = body;
+
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
+
+    cards.forEach(card => {
+      const btn = card.querySelector("button");
+      if (btn) btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openModal(card);
+      });
+      card.classList.add("cursor-pointer");
+      card.addEventListener("click", () => openModal(card));
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+    });
+  }
 
   function initUrgentAiForm() {
     const form = document.getElementById("urgent-ai-form");
@@ -683,6 +802,8 @@
     initAiChatbot();
     initCounters();
     initPortfolioFilters();
+    initPortfolioModal();
+    initBlogModal();
     initTypedHero();
     initTiltCards();
     initLucideIcons();
