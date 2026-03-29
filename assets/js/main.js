@@ -70,7 +70,7 @@
       <header class="site-header fixed inset-x-0 top-0 z-50 bg-slate-950/75 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
           <a href="index.html" class="flex items-center gap-2.5">
-            <img src="assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto">
+            <img src="assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto" width="36" height="36">
             <div class="flex flex-col leading-[0.65] items-start">
               <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
               <span class="text-[0.72rem] font-bold tracking-[0.34em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
@@ -107,7 +107,7 @@
         <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           <div class="lg:col-span-2">
             <div class="mb-6 flex items-center gap-4">
-              <img src="assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto">
+              <img src="assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto" width="64" height="64">
               <div class="flex flex-col items-start leading-[0.72]">
                 <span class="text-5xl font-black tracking-tight text-white leading-none">ENCODE</span>
                 <span class="text-[1.05rem] font-bold tracking-[0.55em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
