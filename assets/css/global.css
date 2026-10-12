@@ -31,15 +31,6 @@ body {
   background-attachment: fixed;
 }
 
-/* Futuristic background grid mask utility */
-.bg-grid-matrix {
-  background-image: 
-    linear-gradient(to right, rgba(126, 220, 5, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(126, 220, 5, 0.08) 1px, transparent 1px);
-  background-size: 3rem 3rem;
-  mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 70%, transparent 110%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 70%, transparent 110%);
-}
 
 /* Dynamic Mouse Spotlight */
 #mouse-glow {
