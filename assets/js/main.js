@@ -73,14 +73,14 @@
 
     slot.innerHTML = `
       <header id="main-header" class="site-header fixed inset-x-0 top-0 z-50 transition-all duration-300">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8">
           <a href="index.html" class="flex items-center gap-3 group">
-            <div class="relative w-10 h-10 flex items-center justify-center rounded-lg bg-green-500/10 border border-green-500/20 group-hover:border-green-500/40 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.3)] transition-all">
-              <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto" width="24" height="24">
+            <div class="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg bg-green-500/10 border border-green-500/20 group-hover:border-green-500/40 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.3)] transition-all">
+              <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-5 sm:h-6 w-auto" width="24" height="24">
             </div>
             <div class="flex flex-col leading-[0.72] items-start">
-              <span class="text-xl font-black tracking-tight text-white leading-none">ENCODE</span>
-              <span class="text-[0.62rem] font-bold tracking-[0.38em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+              <span class="text-lg sm:text-xl font-black tracking-tight text-white leading-none">ENCODE</span>
+              <span class="text-[0.58rem] sm:text-[0.62rem] font-bold tracking-[0.38em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
             </div>
           </a>
 
@@ -109,7 +109,6 @@
           </div>
         </nav>
       </header>
-      <div class="h-[68px]"></div>
     `;
 
     const btn = document.getElementById("mobile-menu-button");
