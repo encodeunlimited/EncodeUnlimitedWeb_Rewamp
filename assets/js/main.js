@@ -43,6 +43,18 @@
       glow.id = "mouse-glow";
       body.appendChild(glow);
     }
+
+    if (!document.getElementById("cursor-aura")) {
+      const aura = document.createElement("div");
+      aura.id = "cursor-aura";
+      body.appendChild(aura);
+    }
+
+    if (!document.getElementById("cursor-dot")) {
+      const dot = document.createElement("div");
+      dot.id = "cursor-dot";
+      body.appendChild(dot);
+    }
   }
 
   function renderNav() {
@@ -136,7 +148,7 @@
     if (!slot) return;
 
     slot.innerHTML = `
-      <footer class="text-white relative overflow-hidden bg-black border-t border-white/5 mt-20">
+      <footer class="text-white relative overflow-hidden bg-transparent backdrop-blur-md border-t border-white/10 mt-16">
         <!-- Ambient Glowing Orbs -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
           <div class="absolute top-10 left-10 w-48 h-48 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
@@ -973,32 +985,33 @@
       mouse.active = false;
     });
 
-    const numParticles = Math.min(50, Math.floor((width * height) / 28000));
+    const numParticles = Math.min(85, Math.max(50, Math.floor((width * height) / 16000)));
     const particles = [];
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 1.8 + 1,
-        alpha: Math.random() * 0.4 + 0.15
+        vx: (Math.random() - 0.5) * 0.75,
+        vy: (Math.random() - 0.5) * 0.75,
+        radius: Math.random() * 2 + 1.2,
+        alpha: Math.random() * 0.5 + 0.35,
+        color: Math.random() > 0.4 ? "rgba(126, 220, 5," : "rgba(34, 197, 94,"
       });
     }
 
     function render() {
       ctx.clearRect(0, 0, width, height);
 
-      // Ambient radial cursor glow
+      // Ambient radial cursor glow on canvas
       if (mouse.active && mouse.x > 0 && mouse.y > 0) {
-        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 250);
-        grad.addColorStop(0, "rgba(126, 220, 5, 0.08)");
-        grad.addColorStop(0.5, "rgba(34, 197, 94, 0.03)");
+        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 300);
+        grad.addColorStop(0, "rgba(126, 220, 5, 0.15)");
+        grad.addColorStop(0.4, "rgba(34, 197, 94, 0.05)");
         grad.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 250, 0, Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, 300, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -1012,32 +1025,51 @@
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
+        // Interactive mouse connection and soft deflection
         if (mouse.active) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            const force = (120 - dist) / 120;
-            p.x -= (dx / dist) * force * 1.8;
-            p.y -= (dy / dist) * force * 1.8;
+
+          if (dist < 180) {
+            // Draw interactive laser filament connecting particle to mouse cursor
+            const filamentAlpha = (1 - dist / 180) * 0.55;
+            ctx.strokeStyle = `rgba(126, 220, 5, ${filamentAlpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+
+            // Soft organic physics push
+            if (dist < 100) {
+              const force = (100 - dist) / 100;
+              p.x -= (dx / dist) * force * 1.5;
+              p.y -= (dy / dist) * force * 1.5;
+            }
           }
         }
 
-        ctx.fillStyle = `rgba(126, 220, 5, ${p.alpha})`;
+        // Draw particle node with neon glow
+        ctx.fillStyle = `${p.color} ${p.alpha})`;
+        ctx.shadowColor = "#7edc05";
+        ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
 
+        // Connect nearby particles to form neural mesh
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 110) {
-            const alpha = (1 - dist / 110) * 0.12;
-            ctx.strokeStyle = `rgba(74, 222, 128, ${alpha})`;
-            ctx.lineWidth = 0.7;
+          if (dist < 135) {
+            const alpha = (1 - dist / 135) * 0.22;
+            ctx.strokeStyle = `rgba(126, 220, 5, ${alpha})`;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
@@ -1055,10 +1087,22 @@
   function initMouseEffects() {
     const body = document.body;
     const cards = document.querySelectorAll(".card, .media-frame, .testimonial-shell, .modern-card-hover");
+    const aura = document.getElementById("cursor-aura");
+    const dot = document.getElementById("cursor-dot");
+
+    let mouseX = -200, mouseY = -200;
+    let auraX = -200, auraY = -200;
 
     window.addEventListener("mousemove", e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
       body.style.setProperty("--mouse-x", `${e.clientX}px`);
       body.style.setProperty("--mouse-y", `${e.clientY}px`);
+
+      if (dot) {
+        dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      }
 
       // Spotlight effect for cards
       cards.forEach(card => {
@@ -1067,6 +1111,42 @@
         const y = e.clientY - rect.top;
         card.style.setProperty("--mouse-x", `${x}px`);
         card.style.setProperty("--mouse-y", `${y}px`);
+      });
+    });
+
+    // Smooth fluid interpolation for the cursor aura
+    function renderAura() {
+      auraX += (mouseX - auraX) * 0.18;
+      auraY += (mouseY - auraY) * 0.18;
+      if (aura) {
+        aura.style.transform = `translate3d(${auraX}px, ${auraY}px, 0)`;
+      }
+      requestAnimationFrame(renderAura);
+    }
+    requestAnimationFrame(renderAura);
+
+    // Dynamic hover scale for interactive elements
+    const hoverTargets = document.querySelectorAll("a, button, input, textarea, [role='button'], .modern-card-hover");
+    hoverTargets.forEach(el => {
+      el.addEventListener("mouseenter", () => {
+        if (aura) {
+          aura.style.width = "54px";
+          aura.style.height = "54px";
+          aura.style.marginTop = "-27px";
+          aura.style.marginLeft = "-27px";
+          aura.style.borderColor = "rgba(126, 220, 5, 0.9)";
+          aura.style.background = "rgba(126, 220, 5, 0.16)";
+        }
+      });
+      el.addEventListener("mouseleave", () => {
+        if (aura) {
+          aura.style.width = "36px";
+          aura.style.height = "36px";
+          aura.style.marginTop = "-18px";
+          aura.style.marginLeft = "-18px";
+          aura.style.borderColor = "rgba(126, 220, 5, 0.6)";
+          aura.style.background = "rgba(126, 220, 5, 0.08)";
+        }
       });
     });
   }

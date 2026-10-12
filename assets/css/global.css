@@ -15,33 +15,78 @@ html {
 }
 
 body {
-  background-color: #000000 !important;
+  background-color: #020502 !important;
   color: #f3f4f6;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
   position: relative;
+  /* Global Cyber Matrix Grid & Ambient Emerald Aurora */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(126, 220, 5, 0.16) 0%, transparent 60%),
+    radial-gradient(circle at 85% 35%, rgba(34, 197, 94, 0.09) 0%, transparent 50%),
+    radial-gradient(circle at 15% 65%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+  background-attachment: fixed;
 }
 
-/* Futuristic background grid */
+/* Futuristic background grid mask utility */
 .bg-grid-matrix {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 5rem 5rem;
+    linear-gradient(to right, rgba(126, 220, 5, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(126, 220, 5, 0.08) 1px, transparent 1px);
+  background-size: 3rem 3rem;
   mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 70%, transparent 110%);
   -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 70%, transparent 110%);
 }
 
-/* Mouse Glow Spotlight */
+/* Dynamic Mouse Spotlight */
 #mouse-glow {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(650px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
-      rgba(126, 220, 5, 0.06),
-      transparent 80%);
-  transition: background 0.15s ease-out;
+  background: radial-gradient(700px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+      rgba(126, 220, 5, 0.14) 0%,
+      rgba(34, 197, 94, 0.06) 40%,
+      transparent 70%);
+  transition: background 0.05s ease-out;
+}
+
+/* Custom Interactive Cursor Halo */
+#cursor-aura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+  margin-left: -18px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(126, 220, 5, 0.6);
+  background: rgba(126, 220, 5, 0.08);
+  box-shadow: 0 0 15px rgba(126, 220, 5, 0.35);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.12s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: screen;
+}
+
+#cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: #7edc05;
+  box-shadow: 0 0 8px #7edc05, 0 0 16px rgba(126, 220, 5, 0.8);
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.02s linear;
 }
 
 /* Fixed Header */
@@ -66,20 +111,20 @@ body {
 
 /* Glassmorphism Classes */
 .glass {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(10, 16, 12, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .card {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 16, 12, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
@@ -87,24 +132,42 @@ body {
 .card:hover {
   transform: translateY(-4px);
   border-color: rgba(126, 220, 5, 0.5);
-  box-shadow: 0 0 25px -5px rgba(126, 220, 5, 0.25);
+  box-shadow: 0 0 30px -5px rgba(126, 220, 5, 0.25);
 }
 
 /* Modern Card Hover for Bento Grid (Veloce Style) */
 .modern-card-hover {
   position: relative;
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 15, 10, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
+.modern-card-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+      rgba(126, 220, 5, 0.14),
+      transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.modern-card-hover:hover::before {
+  opacity: 1;
+}
+
 .modern-card-hover:hover {
   border-color: rgba(126, 220, 5, 0.55) !important;
-  box-shadow: 0 0 30px -5px rgba(126, 220, 5, 0.25), inset 0 0 15px -2px rgba(126, 220, 5, 0.08);
+  box-shadow: 0 0 35px -5px rgba(126, 220, 5, 0.3), inset 0 0 15px -2px rgba(126, 220, 5, 0.1);
   transform: translateY(-5px);
 }
 
