@@ -1,42 +1,39 @@
 (function () {
 
   const navItems = [
-    { label: "Home", href: "index.html", key: "home" },
-    { label: "Services", href: "services.html", key: "services" },
-    { label: "Portfolio", href: "portfolio.html", key: "portfolio" },
-    { label: "About", href: "about.html", key: "about" },
-    { label: "Technologies", href: "technologies.html", key: "technologies" },
-    { label: "Blog", href: "blog.html", key: "blog" },
-    { label: "Contact", href: "contact.html", key: "contact" },
+    { label: "Home", href: "index.html#hero", key: "home" },
+    { label: "Services", href: "index.html#services", key: "services" },
+    { label: "Products", href: "index.html#products", key: "products" },
+    { label: "Process", href: "index.html#timeline", key: "timeline" },
+    { label: "Team", href: "index.html#team", key: "team" },
     { label: "Case Studies", href: "case-studies.html", key: "case-studies" },
-    { label: "Testimonials", href: "index.html#testimonials", key: "testimonials" },
-    { label: "Careers", href: "careers.html", key: "careers" }
+    { label: "Contact", href: "index.html#contact", key: "contact" }
   ];
 
   const pageKey = document.body.dataset.page || "";
 
   function renderGlobalUi() {
     const body = document.body;
+
+    // Interactive Canvas background like Veloce
+    if (!document.getElementById("fluid")) {
+      const canvas = document.createElement("canvas");
+      canvas.id = "fluid";
+      canvas.className = "fixed inset-0 pointer-events-none z-0 w-full h-full";
+      body.prepend(canvas);
+    }
+
     if (!document.getElementById("scroll-progress")) {
       const sp = document.createElement("div");
       sp.id = "scroll-progress";
       body.appendChild(sp);
     }
 
-    if (!document.getElementById("quick-contact")) {
-      const qc = document.createElement("a");
-      qc.id = "quick-contact";
-      qc.href = "contact.html";
-      qc.className = "btn-primary hidden sm:inline-flex";
-      qc.textContent = "Start Project";
-      body.appendChild(qc);
-    }
-
     if (!document.getElementById("back-to-top")) {
       const btt = document.createElement("button");
       btt.id = "back-to-top";
-      btt.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
-      btt.ariaLabel = "Back to top";
+      btt.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><polyline points="18 15 12 9 6 15"/></svg>';
+      btt.ariaLabel = "Scroll to top";
       body.appendChild(btt);
       btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     }
@@ -55,38 +52,64 @@
     const desktopLinks = navItems
       .map((item) => {
         const active = pageKey === item.key ? "active" : "";
-        return `<a href="${item.href}" class="nav-link whitespace-nowrap ${active}">${item.label}</a>`;
+        return `
+          <a href="${item.href}" class="nav-link whitespace-nowrap text-sm font-medium ${active}">
+            ${item.label}
+          </a>
+        `;
       })
       .join("");
 
     const mobileLinks = navItems
       .map((item) => {
         const active = pageKey === item.key ? "active" : "";
-        return `<a href="${item.href}" class="block rounded-lg px-3 py-2 nav-link ${active}">${item.label}</a>`;
+        return `
+          <a href="${item.href}" class="block rounded-lg px-4 py-2.5 text-sm font-medium nav-link ${active}">
+            ${item.label}
+          </a>
+        `;
       })
       .join("");
 
     slot.innerHTML = `
-      <header class="site-header fixed inset-x-0 top-0 z-50 bg-slate-950/75 backdrop-blur-xl">
-        <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="index.html" class="flex items-center gap-2.5">
-            <img src="assets/images/logo-mark.svg" alt="Icon" class="h-9 w-auto" width="36" height="36">
-            <div class="flex flex-col leading-[0.65] items-start">
-              <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
-              <span class="text-[0.72rem] font-bold tracking-[0.34em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+      <header id="main-header" class="site-header fixed inset-x-0 top-0 z-50 transition-all duration-300">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+          <a href="index.html" class="flex items-center gap-3 group">
+            <div class="relative w-10 h-10 flex items-center justify-center rounded-lg bg-green-500/10 border border-green-500/20 group-hover:border-green-500/40 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.3)] transition-all">
+              <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto" width="24" height="24">
+            </div>
+            <div class="flex flex-col leading-[0.72] items-start">
+              <span class="text-xl font-black tracking-tight text-white leading-none">ENCODE</span>
+              <span class="text-[0.62rem] font-bold tracking-[0.38em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
             </div>
           </a>
-          <nav class="hidden min-w-0 flex-1 items-center justify-center gap-5 overflow-x-auto whitespace-nowrap text-[13px] lg:flex">${desktopLinks}</nav>
-          <a href="contact.html" class="btn-primary hidden xl:inline-flex">Start Project</a>
-          <button id="mobile-menu-button" class="rounded-lg border border-slate-700 p-2 text-slate-100 lg:hidden" aria-label="Toggle navigation">
+
+          <nav class="hidden min-w-0 items-center justify-center gap-7 lg:flex">
+            ${desktopLinks}
+          </nav>
+
+          <div class="hidden items-center gap-4 lg:flex">
+            <a href="index.html#contact" class="btn-veloce-primary text-sm font-semibold tracking-wide">
+              <span>Get Started</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <button id="mobile-menu-button" class="inline-flex items-center justify-center rounded-lg border border-gray-800 bg-gray-900/60 p-2 text-white hover:border-green-500/40 hover:text-green-400 transition-all lg:hidden" aria-label="Toggle navigation">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5" />
             </svg>
           </button>
         </div>
-        <nav id="mobile-menu" class="mx-4 mb-4 hidden rounded-xl border border-slate-800 bg-slate-900/90 p-3 lg:hidden">${mobileLinks}</nav>
+
+        <nav id="mobile-menu" class="mx-4 mb-4 hidden rounded-2xl border border-gray-800 bg-black/95 backdrop-blur-2xl p-4 lg:hidden shadow-2xl space-y-1">
+          ${mobileLinks}
+          <div class="pt-3 border-t border-gray-800">
+            <a href="index.html#contact" class="btn-veloce-primary w-full text-center text-sm font-semibold">Get Started</a>
+          </div>
+        </nav>
       </header>
-      <div class="h-[72px] md:h-[76px]"></div>
+      <div class="h-[68px]"></div>
     `;
 
     const btn = document.getElementById("mobile-menu-button");
@@ -95,7 +118,18 @@
       btn.addEventListener("click", function () {
         menu.classList.toggle("hidden");
       });
+      menu.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => menu.classList.add("hidden"));
+      });
     }
+
+    // Scroll listener for header blur styling
+    const header = document.getElementById("main-header");
+    window.addEventListener("scroll", () => {
+      if (header) {
+        header.classList.toggle("scrolled", window.scrollY > 25);
+      }
+    }, { passive: true });
   }
 
   function renderFooter() {
@@ -103,37 +137,99 @@
     if (!slot) return;
 
     slot.innerHTML = `
-      <footer class="mt-20 border-t border-slate-800/80 bg-slate-950/70">
-        <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
-          <div class="lg:col-span-2">
-            <div class="mb-6 flex items-center gap-4">
-              <img src="assets/images/logo-mark.svg" alt="Icon" class="h-16 w-auto" width="64" height="64">
-              <div class="flex flex-col items-start leading-[0.72]">
-                <span class="text-5xl font-black tracking-tight text-white leading-none">ENCODE</span>
-                <span class="text-[1.05rem] font-bold tracking-[0.55em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+      <footer class="text-white relative overflow-hidden bg-black border-t border-white/5 mt-20">
+        <!-- Ambient Glowing Orbs -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          <div class="absolute top-10 left-10 w-48 h-48 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
+          <div class="absolute bottom-10 right-10 w-56 h-56 bg-green-400/5 rounded-full blur-3xl animate-pulse" style="animation-delay:2s"></div>
+        </div>
+
+        <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8 relative z-20">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Col 1: Brand -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center justify-center">
+                  <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto">
+                </div>
+                <div class="flex flex-col leading-[0.72] items-start">
+                  <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
+                  <span class="text-[0.68rem] font-bold tracking-[0.38em] text-[#7edc05] leading-none uppercase">UNLIMITED</span>
+                </div>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Innovating the future of enterprise technology with high-performance software platforms, cloud architectures, and digital transformation solutions.
+              </p>
+              <div class="flex items-center space-x-3 pt-2">
+                <a href="https://github.com/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+                <a href="https://linkedin.com/company/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://twitter.com/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Twitter">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                </a>
+                <a href="mailto:info@encodeunlimited.com" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Email">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
               </div>
             </div>
-            <p class="mt-4 max-w-md text-sm text-slate-300">We design and build scalable digital platforms for ambitious businesses worldwide. Product strategy, engineering, and support under one team.</p>
-          </div>
-          <div>
-            <h4 class="text-sm font-semibold uppercase tracking-wider text-cyan-300">Quick Links</h4>
-            <div class="mt-3 grid grid-cols-1 gap-2 text-sm">
-              <a class="nav-link" href="services.html">Services</a>
-              <a class="nav-link" href="portfolio.html">Portfolio</a>
-              <a class="nav-link" href="case-studies.html">Case Studies</a>
-              <a class="nav-link" href="careers.html">Careers</a>
+
+            <!-- Col 2: Services -->
+            <div class="space-y-4">
+              <h3 class="text-base font-semibold text-green-400 uppercase tracking-wider">Services</h3>
+              <ul class="space-y-2.5 text-sm">
+                <li><a href="index.html#services" class="text-gray-400 hover:text-green-400 transition-all flex items-center gap-2 hover:translate-x-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Custom Web Platforms</a></li>
+                <li><a href="index.html#services" class="text-gray-400 hover:text-green-400 transition-all flex items-center gap-2 hover:translate-x-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Mobile App Development</a></li>
+                <li><a href="index.html#services" class="text-gray-400 hover:text-green-400 transition-all flex items-center gap-2 hover:translate-x-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Cloud Architecture & DevOps</a></li>
+                <li><a href="index.html#services" class="text-gray-400 hover:text-green-400 transition-all flex items-center gap-2 hover:translate-x-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Enterprise ERP & Cloud POS</a></li>
+                <li><a href="index.html#services" class="text-gray-400 hover:text-green-400 transition-all flex items-center gap-2 hover:translate-x-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>AI Copilots & Automation</a></li>
+              </ul>
+            </div>
+
+            <!-- Col 3: Company -->
+            <div class="space-y-4">
+              <h3 class="text-base font-semibold text-green-400 uppercase tracking-wider">Company</h3>
+              <ul class="space-y-2.5 text-sm">
+                <li><a href="about.html" class="text-gray-400 hover:text-green-400 transition-all inline-block hover:translate-x-1">About Us</a></li>
+                <li><a href="portfolio.html" class="text-gray-400 hover:text-green-400 transition-all inline-block hover:translate-x-1">Portfolio</a></li>
+                <li><a href="case-studies.html" class="text-gray-400 hover:text-green-400 transition-all inline-block hover:translate-x-1">Case Studies</a></li>
+                <li><a href="technologies.html" class="text-gray-400 hover:text-green-400 transition-all inline-block hover:translate-x-1">Technologies</a></li>
+                <li><a href="careers.html" class="text-gray-400 hover:text-green-400 transition-all inline-block hover:translate-x-1">Careers</a></li>
+                <li><a href="blog.html" class="text-gray-400 hover:text-green-400 transition-all inline-block hover:translate-x-1">Tech Insights Blog</a></li>
+              </ul>
+            </div>
+
+            <!-- Col 4: Newsletter -->
+            <div class="space-y-4">
+              <h3 class="text-base font-semibold text-green-400 uppercase tracking-wider">Stay Updated</h3>
+              <p class="text-gray-400 text-sm">Subscribe to our newsletter for the latest tech insights and company updates.</p>
+              <form id="newsletter-form" class="space-y-2.5">
+                <input type="email" name="email" required placeholder="Enter your email" class="veloce-input text-sm py-2">
+                <button type="submit" class="btn-veloce-primary w-full text-sm font-semibold justify-center">
+                  <span>Subscribe</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </form>
+              <p id="newsletter-result" class="text-xs text-gray-400"></p>
             </div>
           </div>
-          <div>
-            <h4 class="text-sm font-semibold uppercase tracking-wider text-cyan-300">Connect</h4>
-            <div class="mt-3 flex gap-4 text-sm">
-              <a class="nav-link" href="#" aria-label="LinkedIn">LinkedIn</a>
-              <a class="nav-link" href="#" aria-label="GitHub">GitHub</a>
-              <a class="nav-link" href="#" aria-label="X">X</a>
+
+          <div class="border-t border-gray-800/80 mt-14 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-400">
+              <div class="flex items-center gap-1.5">
+                © ${new Date().getFullYear()} Encode Unlimited (PVT) Limited. Made with
+                <span class="text-green-400 animate-pulse text-base">💚</span> for innovation.
+              </div>
+              <div class="flex items-center space-x-6 text-xs text-gray-400">
+                <a href="#" class="hover:text-green-400 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-green-400 transition-colors">Terms of Service</a>
+                <a href="index.html#contact" class="hover:text-green-400 transition-colors">Support</a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="border-t border-slate-800/70 py-4 text-center text-xs text-slate-400">&copy; ${new Date().getFullYear()} Encode Unlimited. All rights reserved.</div>
       </footer>
     `;
   }
@@ -795,9 +891,171 @@
   }
 
 
+  function initScheduleModal() {
+    const triggers = document.querySelectorAll("[data-schedule-trigger]");
+    const modal = document.getElementById("schedule-modal");
+    const closeBtn = document.getElementById("close-schedule-modal");
+    const form = document.getElementById("schedule-form");
+    const result = document.getElementById("schedule-result");
+    if (!modal) return;
+
+    function openModal() {
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
+
+    triggers.forEach(t => t.addEventListener("click", openModal));
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+    });
+
+    if (form && result) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submit = form.querySelector("button[type='submit']");
+        if (submit) {
+          submit.disabled = true;
+          submit.textContent = "Scheduling Call...";
+        }
+        result.className = "mt-3 text-sm text-[#7edc05]";
+        result.textContent = "Securing calendar slot...";
+
+        const formData = new FormData(form);
+        formData.append("formType", "schedule-call");
+
+        const ok = await submitToGoogle(formData);
+        if (ok) {
+          result.className = "mt-3 text-sm text-emerald-300";
+          result.textContent = "Discovery call request received! We will send a Google Meet invite shortly.";
+          form.reset();
+          setTimeout(closeModal, 2500);
+        } else {
+          result.className = "mt-3 text-sm text-red-400";
+          result.textContent = "Submission failed. Please email us at info@encodeunlimited.com";
+        }
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = "Confirm Call Schedule";
+        }
+      });
+    }
+  }
+
+  function initFluidCanvas() {
+    const canvas = document.getElementById("fluid");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const mouse = { x: -1000, y: -1000, active: false };
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    });
+    window.addEventListener("mouseleave", () => {
+      mouse.active = false;
+    });
+
+    const numParticles = Math.min(50, Math.floor((width * height) / 28000));
+    const particles = [];
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 1.8 + 1,
+        alpha: Math.random() * 0.4 + 0.15
+      });
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Ambient radial cursor glow
+      if (mouse.active && mouse.x > 0 && mouse.y > 0) {
+        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 250);
+        grad.addColorStop(0, "rgba(126, 220, 5, 0.08)");
+        grad.addColorStop(0.5, "rgba(34, 197, 94, 0.03)");
+        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 250, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        if (mouse.active) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            const force = (120 - dist) / 120;
+            p.x -= (dx / dist) * force * 1.8;
+            p.y -= (dy / dist) * force * 1.8;
+          }
+        }
+
+        ctx.fillStyle = `rgba(126, 220, 5, ${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            const alpha = (1 - dist / 110) * 0.12;
+            ctx.strokeStyle = `rgba(74, 222, 128, ${alpha})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
+  }
+
   function initMouseEffects() {
     const body = document.body;
-    const cards = document.querySelectorAll(".card, .media-frame, .testimonial-shell");
+    const cards = document.querySelectorAll(".card, .media-frame, .testimonial-shell, .modern-card-hover");
 
     window.addEventListener("mousemove", e => {
       body.style.setProperty("--mouse-x", `${e.clientX}px`);
@@ -829,10 +1087,12 @@
     renderAiChatbot();
     renderNav();
     renderFooter();
+    initFluidCanvas();
     initScrollEffects();
     initContactForm();
     initNewsletterForm();
     initUrgentAiForm();
+    initScheduleModal();
     initAiChatbot();
     initCounters();
     initPortfolioFilters();
