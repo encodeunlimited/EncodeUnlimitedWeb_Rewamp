@@ -38,23 +38,11 @@
       btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     }
 
-    if (!document.getElementById("mouse-glow")) {
-      const glow = document.createElement("div");
-      glow.id = "mouse-glow";
-      body.appendChild(glow);
-    }
-
-    if (!document.getElementById("cursor-aura")) {
-      const aura = document.createElement("div");
-      aura.id = "cursor-aura";
-      body.appendChild(aura);
-    }
-
-    if (!document.getElementById("cursor-dot")) {
-      const dot = document.createElement("div");
-      dot.id = "cursor-dot";
-      body.appendChild(dot);
-    }
+    // Ensure mouse-following cursor rings and glow elements are removed
+    ["mouse-glow", "cursor-aura", "cursor-dot"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
   }
 
   function renderNav() {
@@ -1085,26 +1073,11 @@
   }
 
   function initMouseEffects() {
-    const body = document.body;
     const cards = document.querySelectorAll(".card, .media-frame, .testimonial-shell, .modern-card-hover");
-    const aura = document.getElementById("cursor-aura");
-    const dot = document.getElementById("cursor-dot");
-
-    let mouseX = -200, mouseY = -200;
-    let auraX = -200, auraY = -200;
+    if (!cards.length) return;
 
     window.addEventListener("mousemove", e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      body.style.setProperty("--mouse-x", `${e.clientX}px`);
-      body.style.setProperty("--mouse-y", `${e.clientY}px`);
-
-      if (dot) {
-        dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-      }
-
-      // Spotlight effect for cards
+      // Spotlight coordinates for cards
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -1112,43 +1085,7 @@
         card.style.setProperty("--mouse-x", `${x}px`);
         card.style.setProperty("--mouse-y", `${y}px`);
       });
-    });
-
-    // Smooth fluid interpolation for the cursor aura
-    function renderAura() {
-      auraX += (mouseX - auraX) * 0.18;
-      auraY += (mouseY - auraY) * 0.18;
-      if (aura) {
-        aura.style.transform = `translate3d(${auraX}px, ${auraY}px, 0)`;
-      }
-      requestAnimationFrame(renderAura);
-    }
-    requestAnimationFrame(renderAura);
-
-    // Dynamic hover scale for interactive elements
-    const hoverTargets = document.querySelectorAll("a, button, input, textarea, [role='button'], .modern-card-hover");
-    hoverTargets.forEach(el => {
-      el.addEventListener("mouseenter", () => {
-        if (aura) {
-          aura.style.width = "54px";
-          aura.style.height = "54px";
-          aura.style.marginTop = "-27px";
-          aura.style.marginLeft = "-27px";
-          aura.style.borderColor = "rgba(126, 220, 5, 0.9)";
-          aura.style.background = "rgba(126, 220, 5, 0.16)";
-        }
-      });
-      el.addEventListener("mouseleave", () => {
-        if (aura) {
-          aura.style.width = "36px";
-          aura.style.height = "36px";
-          aura.style.marginTop = "-18px";
-          aura.style.marginLeft = "-18px";
-          aura.style.borderColor = "rgba(126, 220, 5, 0.6)";
-          aura.style.background = "rgba(126, 220, 5, 0.08)";
-        }
-      });
-    });
+    }, { passive: true });
   }
 
   function initAOSLibrary() {
