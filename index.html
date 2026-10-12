@@ -225,132 +225,356 @@
         </p>
       </div>
 
-      <!-- Infinite Marquee with Left/Right Fades -->
-      <div class="relative w-full overflow-hidden z-20">
-        <!-- Left & Right Gradient Shadows -->
-        <div class="absolute left-0 top-0 bottom-0 w-24 md:w-48 z-20 bg-gradient-to-r from-black via-black/80 to-transparent pointer-events-none"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-24 md:w-48 z-20 bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none"></div>
-
+      <!-- Infinite Marquee with Pure Alpha Fade (No dark shadow overlays) -->
+      <div class="relative w-full overflow-hidden z-20 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
         <!-- Marquee Track -->
-        <div class="flex w-max animate-infinite-scroll hover:pause py-2">
+        <div class="flex w-max animate-infinite-scroll hover:pause py-3">
           
           <!-- Set 1 -->
-          <div class="flex items-center gap-6 md:gap-10 px-4">
+          <div class="flex items-center gap-5 sm:gap-7 px-4">
             
+            <!-- 1. IRD Sri Lanka -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">IRD Sri Lanka</span>
-                <span class="text-xs text-gray-400 mt-1">Inland Revenue Department</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="landmark" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">GovTech</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">IRD Sri Lanka</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Inland Revenue Department</p>
+                </div>
               </div>
             </div>
 
+            <!-- 2. Freshworld.lk -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Freshworld.lk</span>
-                <span class="text-xs text-gray-400 mt-1">Premier Grocery eCommerce</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">eCommerce</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Freshworld.lk</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Grocery & Fresh Delivery Platform</p>
+                </div>
               </div>
             </div>
 
+            <!-- 3. Gamage Construction -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Gamage Const.</span>
-                <span class="text-xs text-gray-400 mt-1">Multi-Site Construction ERP</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">ERP Suite</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Gamage Const.</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Multi-Site Construction HRM & ERP</p>
+                </div>
               </div>
             </div>
 
+            <!-- 4. Danesha Books -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Danesha Books</span>
-                <span class="text-xs text-gray-400 mt-1">Multi-Branch Retail Cloud POS</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="receipt" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Cloud POS</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Danesha Books</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Multi-Branch Retail Cloud POS</p>
+                </div>
               </div>
             </div>
 
+            <!-- 5. Land Settlement Dept -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Land Settlement</span>
-                <span class="text-xs text-gray-400 mt-1">Govt. File Tracking System</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">GovTech</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Land Settlement</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Govt. File Tracking & Workflow</p>
+                </div>
               </div>
             </div>
 
+            <!-- 6. Horana Tools -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Horana Tools</span>
-                <span class="text-xs text-gray-400 mt-1">Industrial Supply Procurement</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="wrench" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">B2B Portal</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Horana Tools</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Industrial Supply Procurement Portal</p>
+                </div>
               </div>
             </div>
 
+            <!-- 7. Epic Restaurant -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Epic Restaurant</span>
-                <span class="text-xs text-gray-400 mt-1">Cloud Kitchen & POS Suite</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="utensils" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Cloud KDS</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Epic Restaurant</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Cloud Kitchen & Fast POS Engine</p>
+                </div>
               </div>
             </div>
 
+            <!-- 8. Power Fitness -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Power Fitness</span>
-                <span class="text-xs text-gray-400 mt-1">Panadura Gym Membership ERP</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="activity" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Gym ERP</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Power Fitness</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Panadura Gym Membership ERP</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. AY Recovery -->
+            <div class="group relative flex-shrink-0 cursor-pointer">
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">FinTech</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">AY Recovery</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Pawning Ledger & Recovery System</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10. Top Brewery -->
+            <div class="group relative flex-shrink-0 cursor-pointer">
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="package" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Production</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Top Brewery</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Factory Batch & Distribution ERP</p>
+                </div>
               </div>
             </div>
 
           </div>
 
-          <!-- Duplicate Set for Seamless Loop -->
-          <div aria-hidden="true" class="flex items-center gap-6 md:gap-10 px-4">
+          <!-- Duplicate Set 2 for Seamless Infinite Loop -->
+          <div aria-hidden="true" class="flex items-center gap-5 sm:gap-7 px-4">
             
+            <!-- 1. IRD Sri Lanka -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">IRD Sri Lanka</span>
-                <span class="text-xs text-gray-400 mt-1">Inland Revenue Department</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="landmark" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">GovTech</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">IRD Sri Lanka</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Inland Revenue Department</p>
+                </div>
               </div>
             </div>
 
+            <!-- 2. Freshworld.lk -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Freshworld.lk</span>
-                <span class="text-xs text-gray-400 mt-1">Premier Grocery eCommerce</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">eCommerce</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Freshworld.lk</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Grocery & Fresh Delivery Platform</p>
+                </div>
               </div>
             </div>
 
+            <!-- 3. Gamage Construction -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Gamage Const.</span>
-                <span class="text-xs text-gray-400 mt-1">Multi-Site Construction ERP</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">ERP Suite</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Gamage Const.</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Multi-Site Construction HRM & ERP</p>
+                </div>
               </div>
             </div>
 
+            <!-- 4. Danesha Books -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Danesha Books</span>
-                <span class="text-xs text-gray-400 mt-1">Multi-Branch Retail Cloud POS</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="receipt" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Cloud POS</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Danesha Books</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Multi-Branch Retail Cloud POS</p>
+                </div>
               </div>
             </div>
 
+            <!-- 5. Land Settlement Dept -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Land Settlement</span>
-                <span class="text-xs text-gray-400 mt-1">Govt. File Tracking System</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">GovTech</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Land Settlement</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Govt. File Tracking & Workflow</p>
+                </div>
               </div>
             </div>
 
+            <!-- 6. Horana Tools -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Horana Tools</span>
-                <span class="text-xs text-gray-400 mt-1">Industrial Supply Procurement</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="wrench" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">B2B Portal</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Horana Tools</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Industrial Supply Procurement Portal</p>
+                </div>
               </div>
             </div>
 
+            <!-- 7. Epic Restaurant -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Epic Restaurant</span>
-                <span class="text-xs text-gray-400 mt-1">Cloud Kitchen & POS Suite</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="utensils" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Cloud KDS</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Epic Restaurant</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Cloud Kitchen & Fast POS Engine</p>
+                </div>
               </div>
             </div>
 
+            <!-- 8. Power Fitness -->
             <div class="group relative flex-shrink-0 cursor-pointer">
-              <div class="w-56 h-28 md:w-64 md:h-32 bg-gray-950/80 border border-gray-800 rounded-xl p-5 flex flex-col items-center justify-center transition-all duration-300 group-hover:border-green-500/50 group-hover:shadow-[0_0_25px_-5px_rgba(126,220,5,0.25)]">
-                <span class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Power Fitness</span>
-                <span class="text-xs text-gray-400 mt-1">Panadura Gym Membership ERP</span>
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="activity" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Gym ERP</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Power Fitness</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Panadura Gym Membership ERP</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. AY Recovery -->
+            <div class="group relative flex-shrink-0 cursor-pointer">
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">FinTech</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">AY Recovery</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Pawning Ledger & Recovery System</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10. Top Brewery -->
+            <div class="group relative flex-shrink-0 cursor-pointer">
+              <div class="w-64 sm:w-72 h-32 sm:h-36 rounded-2xl bg-black/45 backdrop-blur-xl border border-white/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 group-hover:border-green-500/60 group-hover:shadow-[0_0_30px_rgba(126,220,5,0.3)] group-hover:-translate-y-1 relative overflow-hidden">
+                <div class="absolute top-0 inset-x-4 h-[1px] bg-gradient-to-r from-transparent via-green-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex items-center justify-between">
+                  <div class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all">
+                    <i data-lucide="package" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold uppercase tracking-wider">Production</span>
+                </div>
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-green-400 transition-colors leading-tight">Top Brewery</h3>
+                  <p class="text-xs text-gray-400 mt-1 truncate">Factory Batch & Distribution ERP</p>
+                </div>
               </div>
             </div>
 
