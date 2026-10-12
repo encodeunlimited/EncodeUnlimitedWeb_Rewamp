@@ -109,10 +109,10 @@ body {
 }
 
 .card {
-  background: rgba(10, 16, 12, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
@@ -129,10 +129,10 @@ body {
 /* Modern Card Hover for Bento Grid (Veloce Style) */
 .modern-card-hover {
   position: relative;
-  background: rgba(10, 15, 10, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 1rem;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
@@ -152,7 +152,25 @@ body {
   z-index: 1;
 }
 
+.modern-card-hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(126, 220, 5, 0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .modern-card-hover:hover::before {
+  opacity: 1;
+}
+
+.modern-card-hover:hover::after {
   opacity: 1;
 }
 
@@ -783,24 +801,26 @@ body {
 /* Inputs & Form Controls */
 .veloce-input {
   width: 100%;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(75, 85, 99, 0.6);
-  background-color: rgba(31, 41, 55, 0.8);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 0.75rem 1rem;
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .veloce-input:focus {
-  border-color: #4ade80;
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
-  background-color: rgba(17, 24, 39, 0.95);
+  border-color: rgba(126, 220, 5, 0.8);
+  box-shadow: 0 0 0 3px rgba(126, 220, 5, 0.2), 0 0 20px rgba(126, 220, 5, 0.15);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .veloce-input::placeholder {
-  color: #6b7280;
+  color: #64748b;
 }
 
 /* Modern Rotating Badge Container */
