@@ -236,12 +236,14 @@
           </div>
 
           <div class="border-t border-gray-800/80 mt-14 pt-8">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-400">
-              <div class="flex items-center gap-1.5">
-                © ${new Date().getFullYear()} Encode Unlimited (PVT) Limited. Made with
-                <span class="text-green-400 animate-pulse text-base">💚</span> for innovation.
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 text-gray-400">
+              <div class="text-center md:text-left text-xs sm:text-sm leading-relaxed">
+                <span>© ${new Date().getFullYear()} Encode Unlimited (PVT) Limited.</span>
+                <span class="block sm:inline sm:ml-1">
+                  Made with <span class="text-green-400 animate-pulse inline-block text-sm sm:text-base align-middle">💚</span> for innovation.
+                </span>
               </div>
-              <div class="flex items-center space-x-6 text-xs text-gray-400">
+              <div class="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2 text-xs text-gray-400">
                 <a href="#" class="hover:text-green-400 transition-colors">Privacy Policy</a>
                 <a href="#" class="hover:text-green-400 transition-colors">Terms of Service</a>
                 <a href="index.html#contact" class="hover:text-green-400 transition-colors">Support</a>
