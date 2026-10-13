@@ -159,18 +159,38 @@
               <p class="text-gray-400 text-sm leading-relaxed">
                 Innovating the future of enterprise technology with high-performance software platforms, cloud architectures, and digital transformation solutions.
               </p>
-              <div class="flex items-center space-x-3 pt-2">
-                <a href="https://github.com/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="GitHub">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              <div class="flex flex-wrap items-center gap-2 pt-2">
+                <!-- Facebook -->
+                <a href="#" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Facebook">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
-                <a href="https://linkedin.com/company/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="LinkedIn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                <!-- Instagram -->
+                <a href="#" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </a>
-                <a href="https://twitter.com/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Twitter">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                <!-- YouTube -->
+                <a href="#" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="YouTube">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
                 </a>
-                <a href="mailto:info@encodeunlimited.com" class="w-9 h-9 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Email">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <!-- TikTok -->
+                <a href="#" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="TikTok">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tiktok"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/company/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <!-- GitHub -->
+                <a href="https://github.com/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+                <!-- Twitter -->
+                <a href="https://twitter.com/encodeunlimited" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Twitter">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                </a>
+                <!-- Email -->
+                <a href="mailto:info@encodeunlimited.com" class="w-8 h-8 rounded-lg border border-gray-800 bg-gray-900/60 flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-500/40 hover:scale-110 transition-all" aria-label="Email">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 </a>
               </div>
             </div>
@@ -429,6 +449,10 @@
       if (empty) {
         empty.classList.toggle("hidden", visible !== 0);
       }
+
+      if (window.AOS && typeof window.AOS.refresh === "function") {
+        window.AOS.refresh();
+      }
     }
 
     buttons.forEach(function (button) {
@@ -482,22 +506,76 @@
   }
 
 
+  function renderWhatsAppBubble() {
+    if (document.getElementById("whatsapp-bubble")) return;
+    const wa = document.createElement("a");
+    wa.id = "whatsapp-bubble";
+    wa.href = "https://wa.me/94706291709?text=Hello%20Encode%20Unlimited%2C%20I%20would%20like%20to%20inquire%20about%20your%20software%20services.";
+    wa.target = "_blank";
+    wa.rel = "noopener noreferrer";
+    wa.setAttribute("aria-label", "Chat on WhatsApp");
+    wa.className = "group relative flex items-center justify-center";
+    wa.innerHTML = `
+      <!-- Pulse Glow Layer -->
+      <span class="absolute inset-0 rounded-full bg-[#25D366]/30 animate-ping pointer-events-none"></span>
+      
+      <!-- Online Badge -->
+      <span class="absolute top-0 right-0 z-10 flex h-3.5 w-3.5 pointer-events-none">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border-2 border-slate-900"></span>
+      </span>
+
+      <!-- Tooltip -->
+      <span class="whatsapp-tooltip">Chat with us on WhatsApp</span>
+
+      <!-- Real WhatsApp Icon Container (Borderless) -->
+      <div class="relative z-0 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="24 23 126 126" class="w-12 h-12 drop-shadow-[0_4px_18px_rgba(37,211,102,0.65)]">
+          <defs>
+            <linearGradient id="wa-green-gradient" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#57d163"/>
+              <stop offset="1" stop-color="#23b33a"/>
+            </linearGradient>
+          </defs>
+          <!-- Green inner speech bubble -->
+          <path fill="url(#wa-green-gradient)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z"/>
+          <!-- Pure white telephone handset -->
+          <path fill="#ffffff" fill-rule="evenodd" d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647"/>
+        </svg>
+      </div>
+    `;
+    document.body.appendChild(wa);
+  }
+
   function renderAiChatbot() {
     if (document.getElementById("ai-chatbot")) return;
     const wrap = document.createElement("div");
     wrap.id = "ai-chatbot";
     wrap.innerHTML = `
       <div id="ai-chat-panel" class="hidden">
-        <div class="ai-chat-head">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-[#7edc05] flex items-center justify-center text-slate-900 border border-white/20">
-              <i data-lucide="bot" class="w-5 h-5"></i>
+        <div class="ai-chat-head flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-[#7edc05] flex items-center justify-center text-slate-900 border border-white/20 shadow-sm shrink-0">
+              <svg class="w-4.5 h-4.5 text-slate-900" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 8V4H8"/>
+                <rect width="16" height="12" x="4" y="8" rx="2"/>
+                <path d="M2 14h2"/>
+                <path d="M20 14h2"/>
+                <path d="M15 13v2"/>
+                <path d="M9 13v2"/>
+              </svg>
             </div>
             <div>
-              <p class="text-sm font-bold text-white leading-none">EUBOT <span class="ml-1 text-[10px] bg-white/10 px-1 rounded uppercase tracking-wider">AI v2.0</span></p>
-              <p class="text-[10px] text-emerald-400 mt-1 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online & Powerful</p>
+              <p class="text-sm font-bold text-white leading-none">EUBOT <span class="ml-1 text-[10px] bg-white/10 px-1.5 py-0.5 rounded uppercase tracking-wider font-mono text-[#7edc05]">AI v2.0</span></p>
+              <p class="text-[10px] text-emerald-400 mt-1 flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online & Powerful</p>
             </div>
           </div>
+          <button id="ai-chat-close" type="button" class="w-7 h-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors flex items-center justify-center cursor-pointer" aria-label="Close EUBOT">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"/>
+              <path d="m6 6 12 12"/>
+            </svg>
+          </button>
         </div>
         <div id="ai-chat-messages" class="ai-chat-messages">
           <div class="ai-msg bot">Hi! I'm <strong>EUBOT</strong>, Encode Unlimited's digital brain. How can I help you engineer your vision today?</div>
@@ -510,26 +588,41 @@
         </div>
         <div class="ai-chat-input">
           <input id="ai-chat-input" type="text" placeholder="Ask EUBOT anything..." />
-          <button id="ai-chat-send" type="button"><i data-lucide="send" class="w-4 h-4"></i></button>
+          <button id="ai-chat-send" type="button" aria-label="Send message" class="flex items-center justify-center">
+            <svg class="w-4 h-4 text-slate-900" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m22 2-7 20-4-9-9-4Z"/>
+              <path d="M22 2 11 13"/>
+            </svg>
+          </button>
         </div>
       </div>
-      <button id="ai-chat-toggle" type="button" class="group relative flex items-center justify-center" aria-label="Toggle EUBOT">
+      <button id="ai-chat-toggle" type="button" class="group relative flex items-center justify-center cursor-pointer" aria-label="Toggle EUBOT">
         <!-- Pulse Glow Layer -->
-        <span class="absolute inset-0 rounded-full bg-[#7edc05]/20 animate-ping"></span>
+        <span class="absolute inset-0 rounded-full bg-[#7edc05]/20 animate-ping pointer-events-none"></span>
         
         <!-- Online Badge -->
-        <span class="absolute top-0 right-0 z-10 flex h-3 w-3">
+        <span class="absolute top-0 right-0 z-10 flex h-3.5 w-3.5 pointer-events-none">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-slate-900"></span>
+          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-slate-900"></span>
         </span>
         
         <!-- Icon Container -->
-        <div class="relative z-0 w-12 h-12 rounded-full border-2 border-[#7edc05]/50 bg-slate-900 flex items-center justify-center text-[#7edc05] group-hover:border-[#7edc05] group-hover:shadow-[0_0_15px_rgba(126,220,5,0.4)] transition-all duration-300">
-           <i data-lucide="bot" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+        <div class="relative z-0 w-12 h-12 rounded-full border-2 border-[#7edc05]/60 bg-[#0b1329] flex items-center justify-center text-[#7edc05] group-hover:border-[#7edc05] group-hover:shadow-[0_0_18px_rgba(126,220,5,0.5)] transition-all duration-300">
+          <svg class="w-6 h-6 text-[#7edc05] group-hover:scale-110 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8V4H8"/>
+            <rect width="16" height="12" x="4" y="8" rx="2"/>
+            <path d="M2 14h2"/>
+            <path d="M20 14h2"/>
+            <path d="M15 13v2"/>
+            <path d="M9 13v2"/>
+          </svg>
         </div>
       </button>
     `;
     document.body.appendChild(wrap);
+    if (window.lucide && typeof window.lucide.createIcons === "function") {
+      window.lucide.createIcons();
+    }
   }
 
   function initAiChatbot() {
@@ -663,7 +756,14 @@
     function pushMsg(role, text) {
       const el = document.createElement("div");
       el.className = "ai-msg " + role;
-      el.textContent = text;
+      if (role === "bot") {
+        el.innerHTML = text
+          .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\n/g, "<br>");
+      } else {
+        el.textContent = text;
+      }
       msgs.appendChild(el);
       msgs.scrollTop = msgs.scrollHeight;
     }
@@ -682,6 +782,13 @@
       panel.classList.toggle("hidden");
       if (!panel.classList.contains("hidden")) input.focus();
     });
+
+    const closeBtn = document.getElementById("ai-chat-close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        panel.classList.add("hidden");
+      });
+    }
 
     send.addEventListener("click", function () { submitUserMessage(); });
     input.addEventListener("keydown", function (event) {
@@ -908,6 +1015,9 @@
       document.body.style.overflow = "auto";
     }
 
+    window.openScheduleModal = openModal;
+    window.closeScheduleModal = closeModal;
+
     triggers.forEach(t => t.addEventListener("click", openModal));
     if (closeBtn) closeBtn.addEventListener("click", closeModal);
     modal.addEventListener("click", (e) => {
@@ -1091,35 +1201,48 @@
   function initAOSLibrary() {
     if (window.AOS) {
       window.AOS.init({
-        duration: 700,
+        duration: 400,
         once: true,
-        offset: 80
+        offset: 30,
+        easing: "ease-out"
+      });
+      window.addEventListener("load", function () {
+        if (window.AOS && typeof window.AOS.refresh === "function") {
+          window.AOS.refresh();
+        }
       });
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function bootstrap() {
     renderGlobalUi();
-    renderAiChatbot();
     renderNav();
     renderFooter();
+    initAOSLibrary();
+    initLucideIcons();
     initFluidCanvas();
+    renderWhatsAppBubble();
+    renderAiChatbot();
+    initAiChatbot();
     initScrollEffects();
     initContactForm();
     initNewsletterForm();
     initUrgentAiForm();
     initScheduleModal();
-    initAiChatbot();
     initCounters();
     initPortfolioFilters();
     initPortfolioModal();
     initBlogModal();
     initTypedHero();
     initTiltCards();
-    initLucideIcons();
-    initAOSLibrary();
     initMouseEffects();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootstrap);
+  } else {
+    bootstrap();
+  }
 })();
 
 

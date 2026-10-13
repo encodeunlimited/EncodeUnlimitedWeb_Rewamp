@@ -307,6 +307,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.65rem;
   border-radius: 0.5rem;
   background: #16a34a;
   background-image: linear-gradient(to right, #16a34a, #15803d);
@@ -333,6 +334,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   border-radius: 0.5rem;
   border: 1px solid rgba(74, 222, 128, 0.4);
   background: rgba(17, 24, 39, 0.6);
@@ -343,6 +345,13 @@ body {
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
+}
+
+.btn-primary svg, .btn-veloce-primary svg,
+.btn-secondary svg, .btn-veloce-secondary svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .btn-secondary:hover, .btn-veloce-secondary:hover {
@@ -609,22 +618,66 @@ body {
   padding: 1.25rem;
 }
 
+#whatsapp-bubble {
+  position: fixed;
+  right: 1.15rem;
+  bottom: 4.6rem;
+  z-index: 70;
+  width: 3.25rem;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  background: rgba(15, 23, 42, 0.95);
+  color: #ffffff;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(8px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 10px rgba(37, 211, 102, 0.2);
+}
+
+#whatsapp-bubble:hover .whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
 #ai-chatbot {
   position: fixed;
   right: 1rem;
-  bottom: 7.2rem;
+  bottom: 8.5rem;
   z-index: 70;
 }
 
 #ai-chat-toggle {
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 999px;
-  border: 1px solid rgba(126, 220, 5, 0.5);
-  background: rgba(15, 23, 42, 0.94);
-  color: #d9f99d;
-  display: grid;
-  place-items: center;
+  border: none;
+  background: transparent;
+  color: #7edc05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
 }
 
 #ai-chat-panel {
@@ -632,9 +685,23 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 1rem;
   background: rgba(2, 6, 23, 0.96);
-  box-shadow: 0 18px 42px rgba(2, 6, 23, 0.45);
+  box-shadow: 0 18px 42px rgba(2, 6, 23, 0.65), 0 0 20px rgba(126, 220, 5, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   overflow: hidden;
   margin-bottom: 0.65rem;
+  animation: aiChatFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes aiChatFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .ai-chat-head {
@@ -688,6 +755,14 @@ body {
   color: #cbd5e1;
   font-size: 0.72rem;
   padding: 0.28rem 0.55rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-quick button:hover {
+  border-color: #7edc05;
+  color: #ecfccb;
+  background: rgba(126, 220, 5, 0.1);
 }
 
 .ai-chat-input {
@@ -703,19 +778,47 @@ body {
   border: 1px solid rgba(71, 85, 105, 1);
   background: rgba(15, 23, 42, 0.86);
   color: #e2e8f0;
-  padding: 0.52rem 0.7rem;
+  padding: 0.52rem 0.75rem;
   font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-chat-input input:focus {
+  border-color: #7edc05;
+  box-shadow: 0 0 8px rgba(126, 220, 5, 0.2);
 }
 
 .ai-chat-input button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.35rem;
   border-radius: 0.65rem;
-  background: var(--theme-primary);
+  background: #7edc05;
   color: #020617;
   border: 0;
-  padding: 0.52rem 0.8rem;
-  font-size: 0.8rem;
-  font-weight: 600;
+  padding: 0;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(126, 220, 5, 0.25);
+}
+
+.ai-chat-input button:hover {
+  background: #95eb1e;
+  transform: scale(1.05);
+  box-shadow: 0 0 14px rgba(126, 220, 5, 0.45);
+}
+
+.ai-chat-input button:active {
+  transform: scale(0.95);
+}
+
+.ai-chat-input button svg {
+  display: block;
+  stroke: #020617;
 }
 
 /* Timeline & Stage Styles */
