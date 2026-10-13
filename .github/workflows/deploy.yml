@@ -1,27 +1,49 @@
-name: Deploy to Production
+name: Deploy to Production via FTP
 
 on:
   push:
     branches:
       - main
       - master
+  workflow_dispatch:
+    inputs:
+      clean_slate:
+        description: 'Clean slate (purge remote cache & re-upload all files)'
+        required: false
+        default: 'true'
+        type: boolean
 
 jobs:
   deploy:
+    name: FTP Deploy to Hostinger
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Sync files via SSH
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO -i --delete"
-          SOURCE: "/"
-          REMOTE_HOST: "45.130.228.109"
-          REMOTE_USER: "u600962660"
-          REMOTE_PORT: "65002"
-          TARGET: "/home/u600962660/public_html"
-          EXCLUDE: "/.git/, /.github/, /.vscode/, /.gitignore"
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          # Hostinger FTP Host (45.130.228.109 connects directly; ftp.encodeunlimited.com requires unproxied DNS A record)
+          server: 45.130.228.109
+          username: u600962660.webadmin
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./
+          # The FTP account u600962660.webadmin is already chrooted to /home/u600962660/domains/encodeunlimited.com/public_html
+          server-dir: ./
+          # Purge remote cache and wipe stale/deleted files before fresh upload
+          dangerous-clean-slate: true
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github*
+            **/.github*/**
+            **/.vscode*
+            **/.vscode*/**
+            **/scratch*
+            **/test_*
