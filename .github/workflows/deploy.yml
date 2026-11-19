@@ -47,7 +47,3 @@ jobs:
             **/.vscode*/**
             **/scratch*
             **/test_*
-            **/node_modules*
-            **/node_modules*/**
-            **/package*
-            **/tailwind.config.js

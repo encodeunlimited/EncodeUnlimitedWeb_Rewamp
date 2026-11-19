@@ -149,7 +149,7 @@
             <div class="space-y-4">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center justify-center">
-                  <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto" width="24" height="24">
+                  <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto">
                 </div>
                 <div class="flex flex-col leading-[0.72] items-start">
                   <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
@@ -272,11 +272,7 @@
     }
 
     window.addEventListener("scroll", update, { passive: true });
-    if ("requestAnimationFrame" in window) {
-      window.requestAnimationFrame(update);
-    } else {
-      update();
-    }
+    update();
   }
 
   // Replace the placeholder below with the actual Web App URL from Google Apps Script deployment.
@@ -1077,53 +1073,45 @@
     window.addEventListener("resize", () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-    }, { passive: true });
+    });
 
     const mouse = { x: -1000, y: -1000, active: false };
     window.addEventListener("mousemove", (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       mouse.active = true;
-    }, { passive: true });
+    });
     window.addEventListener("mouseleave", () => {
       mouse.active = false;
-    }, { passive: true });
+    });
 
-    // Lightweight particle density (balanced for silky smooth 60fps & low CPU)
-    const numParticles = Math.min(36, Math.max(18, Math.floor((width * height) / 36000)));
+    const numParticles = Math.min(85, Math.max(50, Math.floor((width * height) / 16000)));
     const particles = [];
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 1.8 + 1.2,
-        alpha: Math.random() * 0.4 + 0.3,
+        vx: (Math.random() - 0.5) * 0.75,
+        vy: (Math.random() - 0.5) * 0.75,
+        radius: Math.random() * 2 + 1.2,
+        alpha: Math.random() * 0.5 + 0.35,
         color: Math.random() > 0.4 ? "rgba(126, 220, 5," : "rgba(34, 197, 94,"
       });
     }
 
-    let isVisible = true;
-    document.addEventListener("visibilitychange", () => {
-      isVisible = !document.hidden;
-      if (isVisible) requestAnimationFrame(render);
-    });
-
     function render() {
-      if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
 
       // Ambient radial cursor glow on canvas
       if (mouse.active && mouse.x > 0 && mouse.y > 0) {
-        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 250);
-        grad.addColorStop(0, "rgba(126, 220, 5, 0.12)");
-        grad.addColorStop(0.4, "rgba(34, 197, 94, 0.04)");
+        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 300);
+        grad.addColorStop(0, "rgba(126, 220, 5, 0.15)");
+        grad.addColorStop(0.4, "rgba(34, 197, 94, 0.05)");
         grad.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 250, 0, Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, 300, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -1140,48 +1128,46 @@
         // Interactive mouse connection and soft deflection
         if (mouse.active) {
           const dx = mouse.x - p.x;
-          if (Math.abs(dx) < 160) {
-            const dy = mouse.y - p.y;
-            if (Math.abs(dy) < 160) {
-              const distSq = dx * dx + dy * dy;
-              if (distSq < 25600) {
-                const dist = Math.sqrt(distSq);
-                const filamentAlpha = (1 - dist / 160) * 0.45;
-                ctx.strokeStyle = `rgba(126, 220, 5, ${filamentAlpha})`;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(mouse.x, mouse.y);
-                ctx.stroke();
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 80) {
-                  const force = (80 - dist) / 80;
-                  p.x -= (dx / dist) * force * 1.2;
-                  p.y -= (dy / dist) * force * 1.2;
-                }
-              }
+          if (dist < 180) {
+            // Draw interactive laser filament connecting particle to mouse cursor
+            const filamentAlpha = (1 - dist / 180) * 0.55;
+            ctx.strokeStyle = `rgba(126, 220, 5, ${filamentAlpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+
+            // Soft organic physics push
+            if (dist < 100) {
+              const force = (100 - dist) / 100;
+              p.x -= (dx / dist) * force * 1.5;
+              p.y -= (dy / dist) * force * 1.5;
             }
           }
         }
 
-        // Draw particle node (fast fill without heavy drop-shadow)
+        // Draw particle node with neon glow
         ctx.fillStyle = `${p.color} ${p.alpha})`;
+        ctx.shadowColor = "#7edc05";
+        ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
 
-        // Connect nearby particles to form neural mesh (fast bounding box rejection)
+        // Connect nearby particles to form neural mesh
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
-          if (Math.abs(dx) > 120) continue;
           const dy = p.y - p2.y;
-          if (Math.abs(dy) > 120) continue;
-          const distSq = dx * dx + dy * dy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (distSq < 14400) {
-            const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / 120) * 0.2;
+          if (dist < 135) {
+            const alpha = (1 - dist / 135) * 0.22;
             ctx.strokeStyle = `rgba(126, 220, 5, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.beginPath();
@@ -1195,10 +1181,7 @@
       requestAnimationFrame(render);
     }
 
-    // Delay initial rendering to yield to critical path
-    setTimeout(() => {
-      requestAnimationFrame(render);
-    }, 200);
+    requestAnimationFrame(render);
   }
 
   function initMouseEffects() {
@@ -1219,31 +1202,17 @@
 
   function initAOSLibrary() {
     if (window.AOS) {
-      if ("requestAnimationFrame" in window) {
-        requestAnimationFrame(() => {
-          window.AOS.init({
-            duration: 400,
-            once: true,
-            offset: 30,
-            easing: "ease-out"
-          });
-        });
-      } else {
-        window.AOS.init({
-          duration: 400,
-          once: true,
-          offset: 30,
-          easing: "ease-out"
-        });
-      }
-    }
-  }
-
-  function scheduleIdleTask(fn) {
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(fn, { timeout: 1500 });
-    } else {
-      setTimeout(fn, 120);
+      window.AOS.init({
+        duration: 400,
+        once: true,
+        offset: 30,
+        easing: "ease-out"
+      });
+      window.addEventListener("load", function () {
+        if (window.AOS && typeof window.AOS.refresh === "function") {
+          window.AOS.refresh();
+        }
+      });
     }
   }
 
@@ -1251,8 +1220,12 @@
     renderGlobalUi();
     renderNav();
     renderFooter();
-    initLucideIcons();
     initAOSLibrary();
+    initLucideIcons();
+    initFluidCanvas();
+    renderWhatsAppBubble();
+    renderAiChatbot();
+    initAiChatbot();
     initScrollEffects();
     initContactForm();
     initNewsletterForm();
@@ -1263,15 +1236,8 @@
     initPortfolioModal();
     initBlogModal();
     initTypedHero();
+    initTiltCards();
     initMouseEffects();
-
-    scheduleIdleTask(() => {
-      initFluidCanvas();
-      initTiltCards();
-      renderWhatsAppBubble();
-      renderAiChatbot();
-      initAiChatbot();
-    });
   }
 
   if (document.readyState === "loading") {
