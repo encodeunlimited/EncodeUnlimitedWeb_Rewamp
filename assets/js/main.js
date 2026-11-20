@@ -149,7 +149,7 @@
             <div class="space-y-4">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center justify-center">
-                  <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto">
+                  <img src="assets/images/logo-mark.svg" alt="Encode Logo" class="h-6 w-auto" width="24" height="24">
                 </div>
                 <div class="flex flex-col leading-[0.72] items-start">
                   <span class="text-2xl font-black tracking-tight text-white leading-none">ENCODE</span>
@@ -272,7 +272,11 @@
     }
 
     window.addEventListener("scroll", update, { passive: true });
-    update();
+    if ("requestAnimationFrame" in window) {
+      requestAnimationFrame(update);
+    } else {
+      update();
+    }
   }
 
   // Replace the placeholder below with the actual Web App URL from Google Apps Script deployment.
@@ -1100,7 +1104,14 @@
       });
     }
 
+    let isVisible = true;
+    document.addEventListener("visibilitychange", () => {
+      isVisible = !document.hidden;
+      if (isVisible) requestAnimationFrame(render);
+    });
+
     function render() {
+      if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
 
       // Ambient radial cursor glow on canvas
