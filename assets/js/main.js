@@ -1170,14 +1170,17 @@
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Connect nearby particles to form neural mesh
+        // Connect nearby particles to form neural mesh (fast bounding box check)
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
+          if (dx > 135 || dx < -135) continue;
           const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dy > 135 || dy < -135) continue;
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < 135) {
+          if (distSq < 18225) {
+            const dist = Math.sqrt(distSq);
             const alpha = (1 - dist / 135) * 0.22;
             ctx.strokeStyle = `rgba(126, 220, 5, ${alpha})`;
             ctx.lineWidth = 0.8;
@@ -1213,42 +1216,61 @@
 
   function initAOSLibrary() {
     if (window.AOS) {
-      window.AOS.init({
-        duration: 400,
-        once: true,
-        offset: 30,
-        easing: "ease-out"
-      });
-      window.addEventListener("load", function () {
-        if (window.AOS && typeof window.AOS.refresh === "function") {
-          window.AOS.refresh();
-        }
-      });
+      if ("requestAnimationFrame" in window) {
+        requestAnimationFrame(() => {
+          window.AOS.init({
+            duration: 400,
+            once: true,
+            offset: 30,
+            easing: "ease-out"
+          });
+        });
+      } else {
+        window.AOS.init({
+          duration: 400,
+          once: true,
+          offset: 30,
+          easing: "ease-out"
+        });
+      }
     }
   }
 
   function bootstrap() {
+    // 1. Critical DOM mounting: Header, Footer, and Icons
     renderGlobalUi();
     renderNav();
     renderFooter();
-    initAOSLibrary();
     initLucideIcons();
-    initFluidCanvas();
-    renderWhatsAppBubble();
-    renderAiChatbot();
-    initAiChatbot();
-    initScrollEffects();
-    initContactForm();
-    initNewsletterForm();
-    initUrgentAiForm();
-    initScheduleModal();
-    initCounters();
-    initPortfolioFilters();
-    initPortfolioModal();
-    initBlogModal();
-    initTypedHero();
-    initTiltCards();
-    initMouseEffects();
+
+    // 2. Next animation frame: Forms, scroll tracking, and modals (yields to browser)
+    requestAnimationFrame(() => {
+      initScrollEffects();
+      initContactForm();
+      initNewsletterForm();
+      initUrgentAiForm();
+      initScheduleModal();
+      initCounters();
+      initPortfolioFilters();
+      initPortfolioModal();
+      initBlogModal();
+      initTypedHero();
+
+      // 3. Next frame: Scroll animation library (avoids forced layout reflow)
+      requestAnimationFrame(() => {
+        initAOSLibrary();
+
+        // 4. Yield for auxiliary visual effects (fluid canvas, 3D card tilt, floating bubbles)
+        setTimeout(() => {
+          initFluidCanvas();
+          initTiltCards();
+          renderWhatsAppBubble();
+          renderAiChatbot();
+          initAiChatbot();
+          initMouseEffects();
+        }, 40);
+      });
+    });
   }
 
   if (document.readyState === "loading") {
