@@ -494,6 +494,7 @@
 
   function initTiltCards() {
     if (!window.VanillaTilt) return;
+    if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
     const cards = document.querySelectorAll(".card:not([data-no-tilt])");
     if (!cards.length) return;
     window.VanillaTilt.init(cards, {
@@ -1089,7 +1090,7 @@
       mouse.active = false;
     });
 
-    const numParticles = Math.min(85, Math.max(50, Math.floor((width * height) / 16000)));
+    const numParticles = Math.min(85, Math.max(25, Math.floor((width * height) / 16000)));
     const particles = [];
 
     for (let i = 0; i < numParticles; i++) {
@@ -1264,7 +1265,7 @@
           renderAiChatbot();
           initAiChatbot();
           initMouseEffects();
-        }, 40);
+        }, 120);
       });
     });
   }
